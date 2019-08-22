@@ -37,7 +37,7 @@ class DetailActivity : AppCompatActivity() {
         tvDescription.text = movie.description
         tvReleaseDate.text = movie.releaseDate
         tvVote.text = movie.voteAverage
-        Picasso.get().load(movie.poster).resize(100,140).centerCrop().into(imvPoster)
+        Picasso.get().load(movie.poster).resize(100, 140).centerCrop().into(imvPoster)
     }
 
     override fun onSupportNavigateUp(): Boolean {

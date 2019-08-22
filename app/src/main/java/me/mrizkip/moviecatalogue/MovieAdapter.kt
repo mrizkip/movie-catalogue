@@ -46,7 +46,7 @@ class MovieAdapter(private val context: Context) :
             tvTitle.text = movie.title
             tvDesc.text = movie.description
             tvDate.text = movie.releaseDate
-            Picasso.get().load(movie.poster).resize(100,140).centerCrop().into(imvPoster)
+            Picasso.get().load(movie.poster).resize(100, 140).centerCrop().into(imvPoster)
         }
     }
 }

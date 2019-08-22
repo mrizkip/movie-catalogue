@@ -2,10 +2,9 @@ package me.mrizkip.moviecatalogue
 
 import android.content.Intent
 import android.content.res.TypedArray
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ListView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     private fun addItem() {
         movieList = arrayListOf()
 
-        for (i in movieTitles.indices ) {
+        for (i in movieTitles.indices) {
             val title = movieTitles[i]
             val desc = movieDescriptions[i]
             val releaseDate = movieReleaseDates[i]

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Movie Catalogue</string>
     <string name="item_movie_movie_poster">Movie Poster</string>
+    <string name="detail_movie_poster">Movie Poster</string>
+    <string name="detail_about_this_movie">About this movie</string>
 
     <string-array name="movie_titles">
         <item>Aquaman</item>
