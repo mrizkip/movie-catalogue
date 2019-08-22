@@ -24,7 +24,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.3" />
 
-
     <TextView
         android:id="@+id/itemMovie_tvTitle"
         android:layout_width="0dp"
