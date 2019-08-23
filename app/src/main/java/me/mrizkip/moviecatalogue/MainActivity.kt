@@ -1,16 +1,17 @@
 package me.mrizkip.moviecatalogue
 
+import android.content.Intent
 import android.content.res.TypedArray
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ListView
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var movieTitles: Array<String>
     private lateinit var movieDescriptions: Array<String>
-    private var movieReleaseDates = emptyArray<String>()
-    private var movieVotes = emptyArray<String>()
+    private lateinit var movieReleaseDates: Array<String>
+    private lateinit var movieVotes: Array<String>
     private lateinit var moviePosters: TypedArray
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var movieList: ArrayList<Movie>
@@ -23,6 +24,13 @@ class MainActivity : AppCompatActivity() {
 
         val listView: ListView = findViewById(R.id.main_list_view)
         listView.adapter = movieAdapter
+
+        listView.setOnItemClickListener { parent, view, position, id ->
+            val movie = parent.getItemAtPosition(position) as Movie
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.EXTRA_MOVIE, movie)
+            startActivity(intent)
+        }
 
         prepare()
         addItem()
@@ -39,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     private fun addItem() {
         movieList = arrayListOf()
 
-        for (i in movieTitles.indices ) {
+        for (i in movieTitles.indices) {
             val title = movieTitles[i]
             val desc = movieDescriptions[i]
             val releaseDate = movieReleaseDates[i]

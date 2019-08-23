@@ -37,16 +37,16 @@ class MovieAdapter(private val context: Context) :
     override fun getCount(): Int = movies.size
 
     private class ViewHolder(itemView: View) {
-        private val moviePoster: ImageView = itemView.findViewById(R.id.itemMovie_imvPoster)
-        private val movieTitle: TextView = itemView.findViewById(R.id.itemMovie_tvTitle)
-        private val movieDesc: TextView = itemView.findViewById(R.id.itemMovie_tvDescription)
-        private val movieDate: TextView = itemView.findViewById(R.id.itemMovie_tvReleaseDate)
+        private val imvPoster: ImageView = itemView.findViewById(R.id.itemMovie_imvPoster)
+        private val tvTitle: TextView = itemView.findViewById(R.id.itemMovie_tvTitle)
+        private val tvDesc: TextView = itemView.findViewById(R.id.itemMovie_tvDescription)
+        private val tvDate: TextView = itemView.findViewById(R.id.itemMovie_tvReleaseDate)
 
         fun bindItem(movie: Movie) {
-            movieTitle.text = movie.title
-            movieDesc.text = movie.description
-            movieDate.text = movie.releaseDate
-            Picasso.get().load(movie.poster).resize(100,140).centerCrop().into(moviePoster)
+            tvTitle.text = movie.title
+            tvDesc.text = movie.description
+            tvDate.text = movie.releaseDate
+            Picasso.get().load(movie.poster).resize(100, 140).centerCrop().into(imvPoster)
         }
     }
 }
