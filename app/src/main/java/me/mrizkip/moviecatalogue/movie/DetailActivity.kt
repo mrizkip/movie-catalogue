@@ -1,10 +1,12 @@
-package me.mrizkip.moviecatalogue
+package me.mrizkip.moviecatalogue.movie
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
+import me.mrizkip.moviecatalogue.R
+import me.mrizkip.moviecatalogue.model.Movie
 
 class DetailActivity : AppCompatActivity() {
 

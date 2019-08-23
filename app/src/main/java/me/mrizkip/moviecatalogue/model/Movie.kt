@@ -1,4 +1,4 @@
-package me.mrizkip.moviecatalogue
+package me.mrizkip.moviecatalogue.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

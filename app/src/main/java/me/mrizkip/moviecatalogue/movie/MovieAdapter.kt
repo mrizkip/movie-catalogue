@@ -1,4 +1,4 @@
-package me.mrizkip.moviecatalogue
+package me.mrizkip.moviecatalogue.movie
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,6 +8,8 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
+import me.mrizkip.moviecatalogue.R
+import me.mrizkip.moviecatalogue.model.Movie
 
 class MovieAdapter(private val context: Context) :
     BaseAdapter() {
