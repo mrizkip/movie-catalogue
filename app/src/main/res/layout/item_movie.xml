@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/spacing_small"
-    app:cardCornerRadius="@dimen/card_radius"
-    >
+    app:cardCornerRadius="@dimen/card_radius">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,64 +17,103 @@
             android:layout_height="140dp"
             android:layout_margin="@dimen/spacing_small"
             android:contentDescription="@string/item_movie_movie_poster"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/itemMovie_guidelinePoster"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/backgrounds/scenic" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/itemMovie_guidelinePoster"
+        <TextView
+            android:id="@+id/itemMovie_tvRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.3" />
+            android:layout_marginBottom="@dimen/spacing_tiny"
+            android:background="@color/ratingGood"
+            android:drawableStart="@drawable/ic_star_18dp"
+            android:paddingStart="@dimen/spacing_tiny"
+            android:paddingEnd="@dimen/spacing_tiny"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/itemMovie_imvPoster"
+            app:layout_constraintEnd_toEndOf="@id/itemMovie_imvPoster"
+            tools:text="8.0" />
 
         <TextView
             android:id="@+id/itemMovie_tvTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_small"
-            android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_small"
             android:ellipsize="end"
             android:maxLines="2"
             android:textColor="@color/textPrimary"
-            android:textSize="20sp"
+            android:textSize="@dimen/font_larger"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/itemMovie_guidelinePoster"
+            app:layout_constraintStart_toEndOf="@id/itemMovie_imvPoster"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/cities" />
+
+        <TextView
+            android:id="@+id/itemMovie_tvReleaseDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:lines="1"
+            app:layout_constraintStart_toEndOf="@id/itemMovie_imvPoster"
+            app:layout_constraintTop_toBottomOf="@id/itemMovie_tvTitle"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+        <TextView
+            android:id="@+id/itemMovie_tvRuntime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@drawable/background_genre"
+            android:drawableStart="@drawable/ic_time_black_16dp"
+            android:drawablePadding="@dimen/spacing_tiny"
+            android:paddingStart="@dimen/spacing_tiny"
+            android:paddingEnd="@dimen/spacing_tiny"
+            android:textColor="@color/textPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/itemMovie_imvPoster"
+            app:layout_constraintStart_toEndOf="@id/itemMovie_imvPoster"
+            app:layout_constraintTop_toBottomOf="@id/itemMovie_tvDescription"
+            tools:text="2h 20m" />
+
+        <TextView
+            android:id="@+id/itemMovie_tvGenre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@drawable/background_genre"
+            android:paddingStart="@dimen/spacing_tiny"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:paddingEnd="@dimen/spacing_tiny"
+            android:textColor="@color/textPrimary"
+            app:layout_constraintBottom_toBottomOf="@id/itemMovie_imvPoster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/itemMovie_tvRuntime"
+            app:layout_constraintTop_toBottomOf="@id/itemMovie_tvDescription"
+            tools:text="Action" />
+
 
         <TextView
             android:id="@+id/itemMovie_tvDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_small"
-            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_small"
             android:layout_marginBottom="@dimen/spacing_small"
             android:ellipsize="end"
             android:maxLines="3"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/itemMovie_guidelinePoster"
+            app:layout_constraintStart_toEndOf="@id/itemMovie_imvPoster"
             app:layout_constraintTop_toBottomOf="@id/itemMovie_tvReleaseDate"
-            app:layout_constraintVertical_bias="0.0"
             tools:text="@tools:sample/lorem/random" />
 
-        <TextView
-            android:id="@+id/itemMovie_tvReleaseDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_small"
-            android:layout_marginEnd="@dimen/spacing_small"
-            android:lines="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/itemMovie_guidelinePoster"
-            app:layout_constraintTop_toBottomOf="@id/itemMovie_tvTitle"
-            tools:text="@tools:sample/date/ddmmyy" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
 
