@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/spacing_small"
+    android:layout_marginStart="@dimen/spacing_small"
+    android:layout_marginEnd="@dimen/spacing_small"
+    android:layout_marginBottom="@dimen/spacing_small"
     app:cardCornerRadius="@dimen/card_radius">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +23,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <TextView
@@ -42,11 +45,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_tiny"
             android:layout_marginEnd="@dimen/spacing_small"
             android:ellipsize="end"
             android:maxLines="2"
             android:textColor="@color/textPrimary"
-            android:textSize="@dimen/font_larger"
+            android:textSize="@dimen/font_large"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/itemMovie_imvPoster"
@@ -70,13 +74,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_small"
             android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginBottom="@dimen/spacing_small"
             android:background="@drawable/background_genre"
             android:drawableStart="@drawable/ic_time_black_16dp"
             android:drawablePadding="@dimen/spacing_tiny"
             android:paddingStart="@dimen/spacing_tiny"
             android:paddingEnd="@dimen/spacing_tiny"
             android:textColor="@color/textPrimary"
-            app:layout_constraintBottom_toBottomOf="@+id/itemMovie_imvPoster"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/itemMovie_imvPoster"
             app:layout_constraintTop_toBottomOf="@id/itemMovie_tvDescription"
             tools:text="2h 20m" />
@@ -87,13 +92,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_small"
             android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginBottom="@dimen/spacing_small"
             android:background="@drawable/background_genre"
             android:paddingStart="@dimen/spacing_tiny"
-            app:layout_constraintHorizontal_bias="0.0"
             android:paddingEnd="@dimen/spacing_tiny"
             android:textColor="@color/textPrimary"
-            app:layout_constraintBottom_toBottomOf="@id/itemMovie_imvPoster"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@id/itemMovie_tvRuntime"
             app:layout_constraintTop_toBottomOf="@id/itemMovie_tvDescription"
             tools:text="Action" />

@@ -4,15 +4,18 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.item_movie.view.*
 import me.mrizkip.moviecatalogue.R
 import me.mrizkip.moviecatalogue.model.Movie
-import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MovieAdapter(private val context: Context, private val movieList: ArrayList<Movie>, val clickListener: (Movie) -> Unit) :
+class MovieAdapter(
+    private val context: Context?,
+    private val movieList: ArrayList<Movie>,
+    val clickListener: (Movie) -> Unit
+) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,7 +32,8 @@ class MovieAdapter(private val context: Context, private val movieList: ArrayLis
 
     override fun getItemCount(): Int = movieList.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bindItem(movieList[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
+        holder.bindItem(movieList[position])
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -42,7 +46,20 @@ class MovieAdapter(private val context: Context, private val movieList: ArrayLis
             itemView.itemMovie_tvTitle.text = movie.title
             itemView.itemMovie_tvDescription.text = movie.description
             itemView.itemMovie_tvReleaseDate.text = movie.releaseDate
-            Picasso.get().load(movie.poster).resize(100, 140).centerCrop().into(itemView.itemMovie_imvPoster)
+            itemView.itemMovie_tvRating.text = movie.userRating
+            val userRating = movie.userRating.toFloat()
+            when {
+                userRating >= 7 -> itemView.itemMovie_tvRating.background =
+                    ContextCompat.getDrawable(itemView.context, R.drawable.background_rating_good)
+                userRating >= 4 && userRating < 7 -> itemView.itemMovie_tvRating.background =
+                    ContextCompat.getDrawable(itemView.context, R.drawable.background_rating_medium)
+                userRating < 4 -> itemView.itemMovie_tvRating.background =
+                    ContextCompat.getDrawable(itemView.context, R.drawable.background_rating_bad)
+            }
+            Picasso.get().load(movie.poster).resize(100, 140).centerCrop()
+                .into(itemView.itemMovie_imvPoster)
+            itemView.itemMovie_tvRuntime.text = movie.runtime
+            itemView.itemMovie_tvGenre.text = movie.genre
         }
     }
 }

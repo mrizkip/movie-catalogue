@@ -13,4 +13,6 @@
     <color name="ratingGood">#388E3C</color>
     <color name="ratingMedium">#FFA000</color>
     <color name="ratingBad">#D32F2F</color>
+
+    <color name="cardGenre">#83BCBCBC</color>
 </resources>

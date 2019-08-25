@@ -14,9 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(main_toolbar)
-        supportActionBar?.apply {
-            title = "Movie Catalogue"
-        }
+        supportActionBar?.title = "Movie Catalogue"
 
         setupViewPager(main_viewPager)
         main_tabLayout.setupWithViewPager(main_viewPager)

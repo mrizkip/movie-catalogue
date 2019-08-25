@@ -38,7 +38,7 @@ class DetailActivity : AppCompatActivity() {
         tvTitle.text = movie.title
         tvDescription.text = movie.description
         tvReleaseDate.text = movie.releaseDate
-        tvVote.text = movie.voteAverage
+        tvVote.text = movie.userRating
         Picasso.get().load(movie.poster).resize(100, 140).centerCrop().into(imvPoster)
     }
 
