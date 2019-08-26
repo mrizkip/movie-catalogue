@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".tvShow.DetailTvShowActivity"></activity>
-        <activity android:name=".movie.DetailMovieActivity" />
+        <activity android:name=".movie.DetailMovieActivity"
+            android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppThemeNoActionBar">
