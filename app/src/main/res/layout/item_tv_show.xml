@@ -16,7 +16,7 @@
             android:layout_width="100dp"
             android:layout_height="140dp"
             android:layout_margin="@dimen/spacing_small"
-            android:contentDescription="@string/item_movie_movie_poster"
+            android:contentDescription="@string/item_tv_show_poster"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

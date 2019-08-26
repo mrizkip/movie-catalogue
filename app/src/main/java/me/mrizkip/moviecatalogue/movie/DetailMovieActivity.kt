@@ -39,7 +39,6 @@ class DetailMovieActivity : AppCompatActivity() {
         detailMovie_imvCover.post {
             val width = detailMovie_imvCover.width
             val height = detailMovie_imvCover.height
-            Log.d("DetailMovie ", width.toString())
             Picasso.get().load(movie.poster).resize(width, height).centerCrop().into(detailMovie_imvCover)
         }
         val userRating = movie.userRating.toFloat()

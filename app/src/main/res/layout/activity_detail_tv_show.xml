@@ -6,4 +6,182 @@
     android:layout_height="match_parent"
     tools:context=".tvShow.DetailTvShowActivity">
 
+    <ImageView
+        android:id="@+id/detailTvShow_imvCover"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:contentDescription="Tv Show Cover"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <View
+        android:id="@+id/detailTvShow_imvGradient"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@drawable/gradient_cover_movie"
+        android:contentDescription="Tv Show Gradient"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/detailTvShow_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/toolbar_transparent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/detailTvShow_imvPoster"
+        android:layout_width="100dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_poster_detail"
+        android:contentDescription="@string/detail_tv_show_poster"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/detailTvShow_tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_larger"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/detailTvShow_imvPoster"
+        app:layout_constraintTop_toTopOf="@id/detailTvShow_imvPoster"
+        tools:text="@tools:sample/cities" />
+
+    <TextView
+        android:id="@+id/detailTvShow_tvReleaseDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/detailTvShow_imvPoster"
+        app:layout_constraintTop_toBottomOf="@id/detailTvShow_tvTitle"
+        tools:text="@tools:sample/date/ddmmyy" />
+
+    <TextView
+        android:id="@+id/detailTvShow_tvUserRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:background="@drawable/background_rating_good_detail"
+        android:drawableStart="@drawable/ic_star_18dp"
+        android:drawablePadding="@dimen/spacing_tiny"
+        android:paddingStart="@dimen/spacing_tiny"
+        android:paddingEnd="@dimen/spacing_tiny"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@id/detailTvShow_imvPoster"
+        app:layout_constraintTop_toBottomOf="@id/detailTvShow_imvCover"
+        tools:text="5" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:text="User Rating"
+        android:textColor="@color/textPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/detailTvShow_tvUserRating"
+        app:layout_constraintTop_toBottomOf="@id/detailTvShow_imvCover" />
+
+    <TextView
+        android:id="@+id/detailTvShow_genre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_huge"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:text="Genre"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/font_normal"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/detailTvShow_seasons"
+        app:layout_constraintTop_toBottomOf="@id/detailTvShow_tvUserRating" />
+
+    <TextView
+        android:id="@+id/detailTvShow_tvGenre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_huge"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/font_normal"
+        app:layout_constraintStart_toEndOf="@id/detailTvShow_seasons"
+        app:layout_constraintTop_toBottomOf="@id/detailTvShow_genre"
+        tools:text="ACTION" />
+
+    <TextView
+        android:id="@+id/detailTvShow_seasons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:text="Seasons"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/font_normal"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/detailTvShow_imvPoster"
+        app:layout_constraintTop_toBottomOf="@id/detailTvShow_tvUserRating" />
+
+    <TextView
+        android:id="@+id/detailTvShow_tvSeasons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/font_normal"
+        app:layout_constraintStart_toEndOf="@id/detailTvShow_imvPoster"
+        app:layout_constraintTop_toBottomOf="@id/detailTvShow_seasons"
+        tools:text="2 Seasons" />
+
+    <TextView
+        android:id="@+id/detailTvShow_tvAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:background="@color/colorPrimary"
+        android:paddingStart="@dimen/spacing_normal"
+        android:paddingEnd="@dimen/spacing_normal"
+        android:text="@string/detail_about_this_tv_show"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_large"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detailTvShow_imvPoster" />
+
+    <TextView
+        android:id="@+id/detailTvShow_tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:textColor="@color/textSecondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detailTvShow_tvAbout"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="@tools:sample/lorem/random" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
