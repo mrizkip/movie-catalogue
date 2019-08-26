@@ -1,9 +1,6 @@
 package me.mrizkip.moviecatalogue.movie
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.squareup.picasso.Picasso

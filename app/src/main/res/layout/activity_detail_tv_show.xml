@@ -10,7 +10,7 @@
         android:id="@+id/detailTvShow_imvCover"
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:contentDescription="Tv Show Cover"
+        android:contentDescription="@string/detail_tv_show_tv_show_cover"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:background="@drawable/gradient_cover_movie"
-        android:contentDescription="Tv Show Gradient"
+        android:contentDescription="@string/detail_tv_show_tv_show_gradient"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,11 +33,11 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/toolbar_transparent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <ImageView
         android:id="@+id/detailTvShow_imvPoster"
@@ -91,14 +91,14 @@
         android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@id/detailTvShow_imvPoster"
         app:layout_constraintTop_toBottomOf="@id/detailTvShow_imvCover"
-        tools:text="5" />
+        tools:text="@string/detail_tv_show_rating_number" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_small"
         android:layout_marginTop="@dimen/spacing_small"
-        android:text="User Rating"
+        android:text="@string/detail_tv_show_user_rating"
         android:textColor="@color/textPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -111,7 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_huge"
         android:layout_marginTop="@dimen/spacing_tiny"
-        android:text="Genre"
+        android:text="@string/detail_tv_show_genre"
         android:textColor="@color/textPrimary"
         android:textSize="@dimen/font_normal"
         android:textStyle="bold"
@@ -127,7 +127,7 @@
         android:textSize="@dimen/font_normal"
         app:layout_constraintStart_toEndOf="@id/detailTvShow_seasons"
         app:layout_constraintTop_toBottomOf="@id/detailTvShow_genre"
-        tools:text="ACTION" />
+        tools:text="@string/detail_tv_show_genre_text" />
 
     <TextView
         android:id="@+id/detailTvShow_seasons"
@@ -135,7 +135,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_normal"
         android:layout_marginTop="@dimen/spacing_tiny"
-        android:text="Seasons"
+        android:text="@string/detail_tv_show_seasons"
         android:textColor="@color/textPrimary"
         android:textSize="@dimen/font_normal"
         android:textStyle="bold"
@@ -151,7 +151,7 @@
         android:textSize="@dimen/font_normal"
         app:layout_constraintStart_toEndOf="@id/detailTvShow_imvPoster"
         app:layout_constraintTop_toBottomOf="@id/detailTvShow_seasons"
-        tools:text="2 Seasons" />
+        tools:text="@string/detail_tv_show_seasons_text" />
 
     <TextView
         android:id="@+id/detailTvShow_tvAbout"

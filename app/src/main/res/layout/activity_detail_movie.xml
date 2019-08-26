@@ -10,7 +10,7 @@
         android:id="@+id/detailMovie_imvCover"
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:contentDescription="Movie Cover"
+        android:contentDescription="@string/detail_movie_movie_cover"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:background="@drawable/gradient_cover_movie"
-        android:contentDescription="Movie Cover Gradient"
+        android:contentDescription="@string/detail_movie_movie_cover_gradient"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,11 +33,11 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/toolbar_transparent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <ImageView
         android:id="@+id/detailMovie_imvPoster"
@@ -91,14 +91,14 @@
         android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@id/detailMovie_imvPoster"
         app:layout_constraintTop_toBottomOf="@id/detailMovie_imvCover"
-        tools:text="5" />
+        tools:text="@string/detail_movie_rating_number" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_small"
         android:layout_marginTop="@dimen/spacing_small"
-        android:text="User Rating"
+        android:text="@string/detail_movie_user_rating"
         android:textColor="@color/textPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -111,7 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_huge"
         android:layout_marginTop="@dimen/spacing_tiny"
-        android:text="Genre"
+        android:text="@string/detail_movie_genre"
         android:textColor="@color/textPrimary"
         android:textSize="@dimen/font_normal"
         android:textStyle="bold"
@@ -123,11 +123,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_huge"
-        tools:text="ACTION"
         android:textColor="@color/textPrimary"
         android:textSize="@dimen/font_normal"
         app:layout_constraintStart_toEndOf="@id/detailMovie_runtime"
-        app:layout_constraintTop_toBottomOf="@id/detailMovie_genre" />
+        app:layout_constraintTop_toBottomOf="@id/detailMovie_genre"
+        tools:text="@string/detail_movie_genre_text" />
 
     <TextView
         android:id="@+id/detailMovie_runtime"
@@ -135,7 +135,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_normal"
         android:layout_marginTop="@dimen/spacing_tiny"
-        android:text="Runtime"
+        android:text="@string/detail_movie_runtime"
         android:textColor="@color/textPrimary"
         android:textSize="@dimen/font_normal"
         android:textStyle="bold"
@@ -147,22 +147,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_normal"
-        tools:text="2h 10m"
         android:textColor="@color/textPrimary"
         android:textSize="@dimen/font_normal"
         app:layout_constraintStart_toEndOf="@id/detailMovie_imvPoster"
-        app:layout_constraintTop_toBottomOf="@id/detailMovie_runtime" />
+        app:layout_constraintTop_toBottomOf="@id/detailMovie_runtime"
+        tools:text="@string/detail_movie_runtime_text" />
 
     <TextView
         android:id="@+id/detailMovie_tvAbout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="@string/detail_about_this_movie"
-        android:textColor="@color/white"
         android:layout_marginTop="@dimen/spacing_normal"
+        android:background="@color/colorPrimary"
         android:paddingStart="@dimen/spacing_normal"
         android:paddingEnd="@dimen/spacing_normal"
+        android:text="@string/detail_about_this_movie"
+        android:textColor="@color/white"
         android:textSize="@dimen/font_large"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -174,9 +174,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_small"
         android:layout_marginEnd="@dimen/spacing_normal"
         android:textColor="@color/textSecondary"
-        android:layout_marginTop="@dimen/spacing_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
