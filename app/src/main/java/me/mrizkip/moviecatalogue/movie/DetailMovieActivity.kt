@@ -1,14 +1,14 @@
 package me.mrizkip.moviecatalogue.movie
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import me.mrizkip.moviecatalogue.R
 import me.mrizkip.moviecatalogue.model.Movie
 
-class DetailActivity : AppCompatActivity() {
+class DetailMovieActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_MOVIE = "EXTRA_MOVIE"
@@ -22,7 +22,7 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        setContentView(R.layout.activity_detail_movie)
 
         supportActionBar?.title = "Movie Detail"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

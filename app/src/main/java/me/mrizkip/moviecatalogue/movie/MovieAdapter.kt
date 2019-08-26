@@ -36,11 +36,7 @@ class MovieAdapter(
         holder.bindItem(movieList[position])
 
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        private val imvPoster: ImageView = itemView.itemMovie_imvPoster
-//        private val tvTitle: TextView = itemView.findViewById(R.id.itemMovie_tvTitle)
-//        private val tvDesc: TextView = itemView.findViewById(R.id.itemMovie_tvDescription)
-//        private val tvDate: TextView = itemView.findViewById(R.id.itemMovie_tvReleaseDate)
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindItem(movie: Movie) {
             itemView.itemMovie_tvTitle.text = movie.title
