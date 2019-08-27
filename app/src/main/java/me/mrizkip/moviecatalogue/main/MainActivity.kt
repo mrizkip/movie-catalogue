@@ -1,4 +1,4 @@
-package me.mrizkip.moviecatalogue
+package me.mrizkip.moviecatalogue.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_main.*
+import me.mrizkip.moviecatalogue.R
 import me.mrizkip.moviecatalogue.movie.MovieFragment
 import me.mrizkip.moviecatalogue.tvShow.TvShowFragment
 
@@ -25,7 +26,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViewPager(viewPager: ViewPager?) {
-        val viewPagerAdapter = MainViewPagerAdapter(this, supportFragmentManager)
+        val viewPagerAdapter =
+            MainViewPagerAdapter(this, supportFragmentManager)
         val movieFragment = MovieFragment()
         val tvShowFragment = TvShowFragment()
 
