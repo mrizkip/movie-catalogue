@@ -11,5 +11,8 @@
     <dimen name="spacing_small">8dp</dimen>
     <dimen name="spacing_tiny">4dp</dimen>
 
+    <dimen name="spacing_poster_detail">64dp</dimen>
+    <dimen name="spacing_cover_detail">18dp</dimen>
+
     <dimen name="card_radius">4dp</dimen>
 </resources>
