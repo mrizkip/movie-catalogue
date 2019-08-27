@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_tv_show.view.*
 import me.mrizkip.moviecatalogue.R
 import me.mrizkip.moviecatalogue.model.TvShow
-import me.mrizkip.moviecatalogue.model.TvShowsData
 
 class TvShowFragment : Fragment() {
     private lateinit var tvShowTitles: Array<String>
@@ -40,7 +39,6 @@ class TvShowFragment : Fragment() {
             setHasFixedSize(true)
         }
 
-        tvShowList.addAll(TvShowsData.listData)
         adapter = TvShowAdapter(context, tvShowList) {
             val intent = Intent(context, DetailTvShowActivity::class.java)
                 .putExtra(DetailTvShowActivity.EXTRA_TV_SHOW, it)
