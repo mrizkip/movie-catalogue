@@ -2,6 +2,7 @@ package me.mrizkip.moviecatalogue.movie
 
 
 import android.content.Intent
+import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_movie.view.*
 import me.mrizkip.moviecatalogue.R
 import me.mrizkip.moviecatalogue.model.Movie
-import me.mrizkip.moviecatalogue.model.MoviesData
 
 class MovieFragment : Fragment() {
+    private lateinit var movieTitles: Array<String>
+    private lateinit var movieDescriptions: Array<String>
+    private lateinit var movieReleaseDates: Array<String>
+    private lateinit var movieRatings: Array<String>
+    private lateinit var moviePosters: TypedArray
+    private lateinit var movieRuntimes: Array<String>
+    private lateinit var movieGenres: Array<String>
     private var movieList: ArrayList<Movie> = arrayListOf()
     private lateinit var adapter: MovieAdapter
 
@@ -33,7 +40,6 @@ class MovieFragment : Fragment() {
             setHasFixedSize(true)
         }
 
-        movieList.addAll(MoviesData.listData)
         adapter = MovieAdapter(context, movieList) {
             val intent = Intent(context, DetailMovieActivity::class.java)
                 .putExtra(DetailMovieActivity.EXTRA_MOVIE, it)
@@ -41,5 +47,36 @@ class MovieFragment : Fragment() {
         }
 
         view.movie_recyclerView.adapter = adapter
+
+        prepare()
+        addItem()
+    }
+
+    private fun prepare() {
+        movieTitles = resources.getStringArray(R.array.movie_titles)
+        movieDescriptions = resources.getStringArray(R.array.movie_descriptions)
+        movieReleaseDates = resources.getStringArray(R.array.movie_release_dates)
+        movieRatings = resources.getStringArray(R.array.movie_rating)
+        moviePosters = resources.obtainTypedArray(R.array.movie_posters)
+        movieRuntimes = resources.getStringArray(R.array.movie_runtime)
+        movieGenres = resources.getStringArray(R.array.movie_genre)
+    }
+
+    private fun addItem() {
+        movieList.clear()
+
+        for (i in movieTitles.indices) {
+            val title = movieTitles[i]
+            val desc = movieDescriptions[i]
+            val releaseDate = movieReleaseDates[i]
+            val rating = movieRatings[i]
+            val poster = moviePosters.getResourceId(i, -1)
+            val runtime = movieRuntimes[i]
+            val genre = movieGenres[i]
+            val movie = Movie(title, desc, releaseDate, rating, poster, runtime, genre)
+            movieList.add(movie)
+        }
+
+        adapter.notifyDataSetChanged()
     }
 }

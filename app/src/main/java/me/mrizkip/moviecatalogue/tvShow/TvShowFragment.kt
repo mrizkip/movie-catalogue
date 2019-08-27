@@ -1,7 +1,7 @@
 package me.mrizkip.moviecatalogue.tvShow
 
-
 import android.content.Intent
+import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +14,13 @@ import me.mrizkip.moviecatalogue.model.TvShow
 import me.mrizkip.moviecatalogue.model.TvShowsData
 
 class TvShowFragment : Fragment() {
+    private lateinit var tvShowTitles: Array<String>
+    private lateinit var tvShowDescriptions: Array<String>
+    private lateinit var tvShowReleaseDates: Array<String>
+    private lateinit var tvShowRatings: Array<String>
+    private lateinit var tvShowPosters: TypedArray
+    private lateinit var tvShowSeasons: Array<String>
+    private lateinit var tvShowGenres: Array<String>
     private var tvShowList: ArrayList<TvShow> = arrayListOf()
     private lateinit var adapter: TvShowAdapter
 
@@ -41,5 +48,36 @@ class TvShowFragment : Fragment() {
         }
 
         view.tvShow_recyclerView.adapter = adapter
+        
+        prepare()
+        addItem()
+    }
+
+    private fun prepare() {
+        tvShowTitles = resources.getStringArray(R.array.tv_show_titles)
+        tvShowDescriptions = resources.getStringArray(R.array.tv_show_descriptions)
+        tvShowReleaseDates = resources.getStringArray(R.array.tv_show_release_dates)
+        tvShowRatings = resources.getStringArray(R.array.tv_show_rating)
+        tvShowPosters = resources.obtainTypedArray(R.array.tv_show_posters)
+        tvShowSeasons = resources.getStringArray(R.array.tv_show_seasons)
+        tvShowGenres = resources.getStringArray(R.array.tv_show_genre)
+    }
+
+    private fun addItem() {
+        tvShowList.clear()
+
+        for (i in tvShowTitles.indices) {
+            val title = tvShowTitles[i]
+            val desc = tvShowDescriptions[i]
+            val releaseDate = tvShowReleaseDates[i]
+            val rating = tvShowRatings[i]
+            val poster = tvShowPosters.getResourceId(i, -1)
+            val season = tvShowSeasons[i]
+            val genre = tvShowGenres[i]
+            val movie = TvShow(title, desc, releaseDate, rating, poster, season, genre)
+            tvShowList.add(movie)
+        }
+
+        adapter.notifyDataSetChanged()
     }
 }

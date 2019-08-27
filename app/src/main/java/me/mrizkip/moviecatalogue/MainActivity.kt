@@ -1,6 +1,10 @@
 package me.mrizkip.moviecatalogue
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViewPager(viewPager: ViewPager?) {
-        val viewPagerAdapter = MainViewPagerAdapter(supportFragmentManager)
+        val viewPagerAdapter = MainViewPagerAdapter(this, supportFragmentManager)
         val movieFragment = MovieFragment()
         val tvShowFragment = TvShowFragment()
 
@@ -30,5 +34,18 @@ class MainActivity : AppCompatActivity() {
 
         viewPager?.adapter = viewPagerAdapter
         viewPager?.offscreenPageLimit = viewPagerAdapter.count - 1
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.menuMain_language) {
+            val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+            startActivity(intent)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

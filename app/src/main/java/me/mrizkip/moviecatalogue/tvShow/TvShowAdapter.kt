@@ -52,9 +52,8 @@ class TvShowAdapter(
             }
             Picasso.get().load(tvShow.poster).resize(100, 140).centerCrop()
                 .into(itemView.itemTvShow_imvPoster)
-            val tvSeasons = tvShow.seasons
-            val season = context?.getString(R.string.tv_show_adapter_seasons)
-            itemView.itemTvShow_tvSeasons.text = String.format("%s %s", tvSeasons, season)
+            val season = context?.getString(R.string.tv_show_adapter_seasons, tvShow.seasons)
+            itemView.itemTvShow_tvSeasons.text = season
             itemView.itemTvShow_tvGenre.text = tvShow.genre
         }
     }

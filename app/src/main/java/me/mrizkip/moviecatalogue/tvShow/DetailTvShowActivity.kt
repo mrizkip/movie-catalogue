@@ -31,9 +31,8 @@ class DetailTvShowActivity : AppCompatActivity() {
         detailTvShow_tvReleaseDate.text = tvShow.releaseDate
         detailTvShow_tvUserRating.text = tvShow.userRating
         detailTvShow_tvGenre.text = tvShow.genre
-        val tvSeasons = tvShow.seasons
-        val season = getString(R.string.tv_show_adapter_seasons)
-        detailTvShow_tvSeasons.text = String.format("%s %s", tvSeasons, season)
+        val season = getString(R.string.tv_show_adapter_seasons, tvShow.seasons)
+        detailTvShow_tvSeasons.text = season
         Picasso.get().load(tvShow.poster).resize(100, 140).centerCrop().into(detailTvShow_imvPoster)
         detailTvShow_imvCover.post {
             val width = detailTvShow_imvCover.width
