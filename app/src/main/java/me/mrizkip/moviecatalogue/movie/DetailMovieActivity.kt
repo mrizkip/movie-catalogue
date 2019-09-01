@@ -27,18 +27,18 @@ class DetailMovieActivity : AppCompatActivity() {
         val movie: Movie = intent.getParcelableExtra(EXTRA_MOVIE)
 
         detailMovie_tvTitle.text = movie.title
-        detailMovie_tvDescription.text = movie.description
+        detailMovie_tvDescription.text = movie.overview
         detailMovie_tvReleaseDate.text = movie.releaseDate
-        detailMovie_tvUserRating.text = movie.userRating
-        detailMovie_tvGenre.text = movie.genre
-        detailMovie_tvRuntime.text = movie.runtime
-        Picasso.get().load(movie.poster).resize(100, 140).centerCrop().into(detailMovie_imvPoster)
+        detailMovie_tvUserRating.text = movie.voteAverage.toString()
+//        detailMovie_tvGenre.text = movie.genre
+//        detailMovie_tvRuntime.text = movie.runtime
+        Picasso.get().load(movie.posterPath).resize(100, 140).centerCrop().into(detailMovie_imvPoster)
         detailMovie_imvCover.post {
             val width = detailMovie_imvCover.width
             val height = detailMovie_imvCover.height
-            Picasso.get().load(movie.poster).resize(width, height).centerCrop().into(detailMovie_imvCover)
+            Picasso.get().load(movie.posterPath).resize(width, height).centerCrop().into(detailMovie_imvCover)
         }
-        val userRating = movie.userRating.toFloat()
+        val userRating = movie.voteAverage!!.toFloat()
         when {
             userRating >= 7 -> detailMovie_tvUserRating.background =
                 ContextCompat.getDrawable(this, R.drawable.background_rating_good_detail)

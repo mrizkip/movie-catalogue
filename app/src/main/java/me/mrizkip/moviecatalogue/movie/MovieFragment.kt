@@ -8,6 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_movie.view.*
 import me.mrizkip.moviecatalogue.R
@@ -23,6 +26,8 @@ class MovieFragment : Fragment() {
     private lateinit var movieGenres: Array<String>
     private var movieList: ArrayList<Movie> = arrayListOf()
     private lateinit var adapter: MovieAdapter
+
+    private lateinit var viewModel: MovieViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,35 +53,52 @@ class MovieFragment : Fragment() {
 
         view.movie_recyclerView.adapter = adapter
 
-        prepare()
-        addItem()
+        getMovieData()
+//        prepare()
+//        addItem()
+    }
+
+    private fun getMovieData() {
+        movieList.clear()
+        viewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
+
+        viewModel.getStatus().observe(this, Observer { status ->
+            // set loading
+        })
+
+        viewModel.getMovieData().observe(this, Observer { movies ->
+            movies?.let {
+                movieList.addAll(it)
+                adapter.notifyDataSetChanged()
+            }
+        })
     }
 
     private fun prepare() {
-        movieTitles = resources.getStringArray(R.array.movie_titles)
-        movieDescriptions = resources.getStringArray(R.array.movie_descriptions)
-        movieReleaseDates = resources.getStringArray(R.array.movie_release_dates)
-        movieRatings = resources.getStringArray(R.array.movie_rating)
-        moviePosters = resources.obtainTypedArray(R.array.movie_posters)
-        movieRuntimes = resources.getStringArray(R.array.movie_runtime)
-        movieGenres = resources.getStringArray(R.array.movie_genre)
+//        movieTitles = resources.getStringArray(R.array.movie_titles)
+//        movieDescriptions = resources.getStringArray(R.array.movie_descriptions)
+//        movieReleaseDates = resources.getStringArray(R.array.movie_release_dates)
+//        movieRatings = resources.getStringArray(R.array.movie_rating)
+//        moviePosters = resources.obtainTypedArray(R.array.movie_posters)
+//        movieRuntimes = resources.getStringArray(R.array.movie_runtime)
+//        movieGenres = resources.getStringArray(R.array.movie_genre)
     }
 
     private fun addItem() {
-        movieList.clear()
-
-        for (i in movieTitles.indices) {
-            val title = movieTitles[i]
-            val desc = movieDescriptions[i]
-            val releaseDate = movieReleaseDates[i]
-            val rating = movieRatings[i]
-            val poster = moviePosters.getResourceId(i, -1)
-            val runtime = movieRuntimes[i]
-            val genre = movieGenres[i]
-            val movie = Movie(title, desc, releaseDate, rating, poster, runtime, genre)
-            movieList.add(movie)
-        }
-
-        adapter.notifyDataSetChanged()
+//        movieList.clear()
+//
+//        for (i in movieTitles.indices) {
+//            val title = movieTitles[i]
+//            val desc = movieDescriptions[i]
+//            val releaseDate = movieReleaseDates[i]
+//            val rating = movieRatings[i]
+//            val poster = moviePosters.getResourceId(i, -1)
+//            val runtime = movieRuntimes[i]
+//            val genre = movieGenres[i]
+//            val movie = Movie(title, desc, releaseDate, rating, poster, runtime, genre)
+//            movieList.add(movie)
+//        }
+//
+//        adapter.notifyDataSetChanged()
     }
 }

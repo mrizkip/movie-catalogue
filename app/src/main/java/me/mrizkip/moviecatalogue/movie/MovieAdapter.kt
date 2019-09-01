@@ -40,10 +40,10 @@ class MovieAdapter(
 
         fun bindItem(movie: Movie) {
             itemView.itemMovie_tvTitle.text = movie.title
-            itemView.itemMovie_tvDescription.text = movie.description
+            itemView.itemMovie_tvDescription.text = movie.overview
             itemView.itemMovie_tvReleaseDate.text = movie.releaseDate
-            itemView.itemMovie_tvRating.text = movie.userRating
-            val userRating = movie.userRating.toFloat()
+            itemView.itemMovie_tvRating.text = movie.voteAverage.toString()
+            val userRating = movie.voteAverage!!.toFloat()
             when {
                 userRating >= 7 -> itemView.itemMovie_tvRating.background =
                     ContextCompat.getDrawable(itemView.context, R.drawable.background_rating_good)
@@ -52,10 +52,9 @@ class MovieAdapter(
                 userRating < 4 -> itemView.itemMovie_tvRating.background =
                     ContextCompat.getDrawable(itemView.context, R.drawable.background_rating_bad)
             }
-            Picasso.get().load(movie.poster).resize(100, 140).centerCrop()
+            val moviePosterUrl = "https://image.tmdb.org/t/p/w600_and_h900_bestv2"
+            Picasso.get().load("$moviePosterUrl${movie.posterPath}").resize(100, 140).centerCrop()
                 .into(itemView.itemMovie_imvPoster)
-            itemView.itemMovie_tvRuntime.text = movie.runtime
-            itemView.itemMovie_tvGenre.text = movie.genre
         }
     }
 }
