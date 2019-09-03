@@ -1,4 +1,4 @@
-package me.mrizkip.moviecatalogue.main
+package me.mrizkip.moviecatalogue.ui.main
 
 import android.content.Context
 import androidx.fragment.app.Fragment

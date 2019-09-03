@@ -67,53 +67,18 @@
             tools:text="@tools:sample/date/ddmmyy" />
 
         <TextView
-            android:id="@+id/itemMovie_tvRuntime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_small"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:layout_marginBottom="@dimen/spacing_small"
-            android:background="@drawable/background_genre"
-            android:drawableStart="@drawable/ic_time_black_16dp"
-            android:drawablePadding="@dimen/spacing_tiny"
-            android:paddingStart="@dimen/spacing_tiny"
-            android:paddingEnd="@dimen/spacing_tiny"
-            android:textColor="@color/textPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/itemMovie_imvPoster"
-            app:layout_constraintTop_toBottomOf="@id/itemMovie_tvDescription"
-            tools:text="2h 20m" />
-
-        <TextView
-            android:id="@+id/itemMovie_tvGenre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_small"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:layout_marginBottom="@dimen/spacing_small"
-            android:background="@drawable/background_genre"
-            android:paddingStart="@dimen/spacing_tiny"
-            android:paddingEnd="@dimen/spacing_tiny"
-            android:textColor="@color/textPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/itemMovie_tvRuntime"
-            app:layout_constraintTop_toBottomOf="@id/itemMovie_tvDescription"
-            tools:text="Action" />
-
-
-        <TextView
             android:id="@+id/itemMovie_tvDescription"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="@dimen/spacing_small"
             android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_small"
             android:layout_marginBottom="@dimen/spacing_small"
             android:ellipsize="end"
-            android:maxLines="2"
+            android:maxLines="3"
+            app:layout_constraintVertical_bias="0.0"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/itemMovie_imvPoster"
             app:layout_constraintTop_toBottomOf="@id/itemMovie_tvReleaseDate"
             tools:text="@tools:sample/lorem/random" />

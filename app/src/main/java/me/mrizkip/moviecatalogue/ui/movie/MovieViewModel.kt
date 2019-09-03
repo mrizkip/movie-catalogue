@@ -1,10 +1,11 @@
-package me.mrizkip.moviecatalogue.movie
+package me.mrizkip.moviecatalogue.ui.movie
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import me.mrizkip.moviecatalogue.BuildConfig
 import me.mrizkip.moviecatalogue.model.Movie
+import me.mrizkip.moviecatalogue.model.Movies
 import me.mrizkip.moviecatalogue.repository.ApiRepository
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,17 +20,17 @@ class MovieViewModel : ViewModel() {
     }
 
     private fun fetchMovie() {
-        ApiRepository().getMovieService().getNowPlayingMovies(BuildConfig.TMDB_API_KEY)
-            .enqueue(object : Callback<List<Movie>> {
-                override fun onFailure(call: Call<List<Movie>>, t: Throwable) {
+        ApiRepository().getMovieService().discoverMovies(BuildConfig.TMDB_API_KEY)
+            .enqueue(object : Callback<Movies> {
+                override fun onFailure(call: Call<Movies>, t: Throwable) {
                     status.value = false
                     movieData.value = null
                 }
 
-                override fun onResponse(call: Call<List<Movie>>, response: Response<List<Movie>>) {
+                override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
                     if (response.isSuccessful) {
                         status.value = true
-                        movieData.value = response.body()
+                        movieData.value = response.body()?.movies
                     } else {
                         status.value = false
                         movieData.value = null

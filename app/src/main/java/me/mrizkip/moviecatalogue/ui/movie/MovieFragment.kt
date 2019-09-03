@@ -1,15 +1,13 @@
-package me.mrizkip.moviecatalogue.movie
+package me.mrizkip.moviecatalogue.ui.movie
 
 
 import android.content.Intent
-import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_movie.view.*
@@ -17,13 +15,6 @@ import me.mrizkip.moviecatalogue.R
 import me.mrizkip.moviecatalogue.model.Movie
 
 class MovieFragment : Fragment() {
-    private lateinit var movieTitles: Array<String>
-    private lateinit var movieDescriptions: Array<String>
-    private lateinit var movieReleaseDates: Array<String>
-    private lateinit var movieRatings: Array<String>
-    private lateinit var moviePosters: TypedArray
-    private lateinit var movieRuntimes: Array<String>
-    private lateinit var movieGenres: Array<String>
     private var movieList: ArrayList<Movie> = arrayListOf()
     private lateinit var adapter: MovieAdapter
 
@@ -47,15 +38,13 @@ class MovieFragment : Fragment() {
 
         adapter = MovieAdapter(context, movieList) {
             val intent = Intent(context, DetailMovieActivity::class.java)
-                .putExtra(DetailMovieActivity.EXTRA_MOVIE, it)
+                .putExtra(DetailMovieActivity.EXTRA_MOVIE_ID, it.id)
             startActivity(intent)
         }
 
         view.movie_recyclerView.adapter = adapter
 
         getMovieData()
-//        prepare()
-//        addItem()
     }
 
     private fun getMovieData() {
@@ -63,7 +52,13 @@ class MovieFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
 
         viewModel.getStatus().observe(this, Observer { status ->
-            // set loading
+            if (status) {
+                view?.movie_error?.visibility = View.GONE
+                view?.movie_recyclerView?.visibility = View.VISIBLE
+            } else {
+                view?.movie_error?.visibility = View.VISIBLE
+                view?.movie_recyclerView?.visibility = View.GONE
+            }
         })
 
         viewModel.getMovieData().observe(this, Observer { movies ->
@@ -72,33 +67,5 @@ class MovieFragment : Fragment() {
                 adapter.notifyDataSetChanged()
             }
         })
-    }
-
-    private fun prepare() {
-//        movieTitles = resources.getStringArray(R.array.movie_titles)
-//        movieDescriptions = resources.getStringArray(R.array.movie_descriptions)
-//        movieReleaseDates = resources.getStringArray(R.array.movie_release_dates)
-//        movieRatings = resources.getStringArray(R.array.movie_rating)
-//        moviePosters = resources.obtainTypedArray(R.array.movie_posters)
-//        movieRuntimes = resources.getStringArray(R.array.movie_runtime)
-//        movieGenres = resources.getStringArray(R.array.movie_genre)
-    }
-
-    private fun addItem() {
-//        movieList.clear()
-//
-//        for (i in movieTitles.indices) {
-//            val title = movieTitles[i]
-//            val desc = movieDescriptions[i]
-//            val releaseDate = movieReleaseDates[i]
-//            val rating = movieRatings[i]
-//            val poster = moviePosters.getResourceId(i, -1)
-//            val runtime = movieRuntimes[i]
-//            val genre = movieGenres[i]
-//            val movie = Movie(title, desc, releaseDate, rating, poster, runtime, genre)
-//            movieList.add(movie)
-//        }
-//
-//        adapter.notifyDataSetChanged()
     }
 }

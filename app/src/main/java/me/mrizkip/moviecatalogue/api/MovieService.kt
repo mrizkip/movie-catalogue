@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface MovieService {
     @GET("/3/movie/now_playing?")
-    fun getNowPlayingMovies(@Query("api_key") api_key: String): Call<List<Movie>>
+    fun discoverMovies(@Query("api_key") api_key: String): Call<Movies>
 
     @GET("/3/movie/{id}?")
     fun getDetailMovie(@Path("id") id: String, @Query("api_key") api_key: String): Call<Movie>

@@ -1,4 +1,4 @@
-package me.mrizkip.moviecatalogue.movie
+package me.mrizkip.moviecatalogue.ui.movie
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -52,7 +52,7 @@ class MovieAdapter(
                 userRating < 4 -> itemView.itemMovie_tvRating.background =
                     ContextCompat.getDrawable(itemView.context, R.drawable.background_rating_bad)
             }
-            val moviePosterUrl = "https://image.tmdb.org/t/p/w600_and_h900_bestv2"
+            val moviePosterUrl = "https://image.tmdb.org/t/p/w185"
             Picasso.get().load("$moviePosterUrl${movie.posterPath}").resize(100, 140).centerCrop()
                 .into(itemView.itemMovie_imvPoster)
         }

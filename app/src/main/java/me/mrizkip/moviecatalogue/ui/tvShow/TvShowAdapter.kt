@@ -1,4 +1,4 @@
-package me.mrizkip.moviecatalogue.tvShow
+package me.mrizkip.moviecatalogue.ui.tvShow
 
 import android.content.Context
 import android.view.LayoutInflater

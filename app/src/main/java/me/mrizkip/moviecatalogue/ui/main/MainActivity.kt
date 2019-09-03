@@ -1,4 +1,4 @@
-package me.mrizkip.moviecatalogue.main
+package me.mrizkip.moviecatalogue.ui.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_main.*
 import me.mrizkip.moviecatalogue.R
-import me.mrizkip.moviecatalogue.movie.MovieFragment
-import me.mrizkip.moviecatalogue.tvShow.TvShowFragment
+import me.mrizkip.moviecatalogue.ui.movie.MovieFragment
+import me.mrizkip.moviecatalogue.ui.tvShow.TvShowFragment
 
 class MainActivity : AppCompatActivity() {
 

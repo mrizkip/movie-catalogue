@@ -33,6 +33,12 @@
     <string name="detail_tv_show_seasons">Seasons</string>
     <string name="detail_tv_show_seasons_text">2 Seasons</string>
 
+    <string name="movie_fragment_error_icon">Error Icon</string>
+    <string name="movie_fragment_error_message">Something error, data couldn\'t be loaded</string>
+
+    <string name="tv_show_fragment_error_icon">Error Icon</string>
+    <string name="tv_show_fragment_error_message">Something error, data couldn\'t be loaded</string>
+
     <string-array name="movie_titles">
         <item>Aquaman</item>
         <item>Avengers: Infinity War</item>

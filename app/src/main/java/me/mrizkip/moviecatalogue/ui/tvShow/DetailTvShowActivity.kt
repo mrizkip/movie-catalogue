@@ -1,4 +1,4 @@
-package me.mrizkip.moviecatalogue.tvShow
+package me.mrizkip.moviecatalogue.ui.tvShow
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

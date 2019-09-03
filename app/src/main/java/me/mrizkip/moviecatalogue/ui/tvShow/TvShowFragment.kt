@@ -1,4 +1,4 @@
-package me.mrizkip.moviecatalogue.tvShow
+package me.mrizkip.moviecatalogue.ui.tvShow
 
 import android.content.Intent
 import android.content.res.TypedArray
@@ -46,7 +46,7 @@ class TvShowFragment : Fragment() {
         }
 
         view.tvShow_recyclerView.adapter = adapter
-        
+
         prepare()
         addItem()
     }
