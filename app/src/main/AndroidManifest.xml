@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="me.mrizkip.moviecatalogue.ui.tvShow.DetailTvShowActivity"
+            android:name="me.mrizkip.moviecatalogue.ui.detailTvShow.DetailTvShowActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name="me.mrizkip.moviecatalogue.ui.detailMovie.DetailMovieActivity"

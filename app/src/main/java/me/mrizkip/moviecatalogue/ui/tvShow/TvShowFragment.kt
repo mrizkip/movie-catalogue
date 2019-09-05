@@ -1,27 +1,24 @@
 package me.mrizkip.moviecatalogue.ui.tvShow
 
 import android.content.Intent
-import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_tv_show.view.*
 import me.mrizkip.moviecatalogue.R
 import me.mrizkip.moviecatalogue.model.TvShow
+import me.mrizkip.moviecatalogue.ui.detailTvShow.DetailTvShowActivity
 
 class TvShowFragment : Fragment() {
-    private lateinit var tvShowTitles: Array<String>
-    private lateinit var tvShowDescriptions: Array<String>
-    private lateinit var tvShowReleaseDates: Array<String>
-    private lateinit var tvShowRatings: Array<String>
-    private lateinit var tvShowPosters: TypedArray
-    private lateinit var tvShowSeasons: Array<String>
-    private lateinit var tvShowGenres: Array<String>
     private var tvShowList: ArrayList<TvShow> = arrayListOf()
     private lateinit var adapter: TvShowAdapter
+
+    private lateinit var viewModel: TvShowViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,43 +36,39 @@ class TvShowFragment : Fragment() {
             setHasFixedSize(true)
         }
 
+        viewModel = ViewModelProviders.of(this).get(TvShowViewModel::class.java)
+
         adapter = TvShowAdapter(context, tvShowList) {
             val intent = Intent(context, DetailTvShowActivity::class.java)
-                .putExtra(DetailTvShowActivity.EXTRA_TV_SHOW, it)
+                .putExtra(DetailTvShowActivity.EXTRA_TV_SHOW_ID, it.id)
             startActivity(intent)
         }
 
         view.tvShow_recyclerView.adapter = adapter
 
-        prepare()
-        addItem()
+        getTvShowData()
     }
 
-    private fun prepare() {
-        tvShowTitles = resources.getStringArray(R.array.tv_show_titles)
-        tvShowDescriptions = resources.getStringArray(R.array.tv_show_descriptions)
-        tvShowReleaseDates = resources.getStringArray(R.array.tv_show_release_dates)
-        tvShowRatings = resources.getStringArray(R.array.tv_show_rating)
-        tvShowPosters = resources.obtainTypedArray(R.array.tv_show_posters)
-        tvShowSeasons = resources.getStringArray(R.array.tv_show_seasons)
-        tvShowGenres = resources.getStringArray(R.array.tv_show_genre)
-    }
-
-    private fun addItem() {
+    private fun getTvShowData() {
         tvShowList.clear()
 
-        for (i in tvShowTitles.indices) {
-            val title = tvShowTitles[i]
-            val desc = tvShowDescriptions[i]
-            val releaseDate = tvShowReleaseDates[i]
-            val rating = tvShowRatings[i]
-            val poster = tvShowPosters.getResourceId(i, -1)
-            val season = tvShowSeasons[i]
-            val genre = tvShowGenres[i]
-            val movie = TvShow(title, desc, releaseDate, rating, poster, season, genre)
-            tvShowList.add(movie)
-        }
+        view?.tvShow_progressBar?.visibility = View.VISIBLE
+        viewModel.getStatus().observe(this, Observer { status ->
+            if (status) {
+                view?.tvShow_error?.visibility = View.GONE
+                view?.tvShow_recyclerView?.visibility = View.VISIBLE
+            } else {
+                view?.tvShow_error?.visibility = View.VISIBLE
+                view?.tvShow_recyclerView?.visibility = View.GONE
+            }
+            view?.tvShow_progressBar?.visibility = View.GONE
+        })
 
-        adapter.notifyDataSetChanged()
+        viewModel.getTvShowsData().observe(this, Observer { tvShows ->
+            tvShows?.let {
+                tvShowList.addAll(it)
+                adapter.notifyDataSetChanged()
+            }
+        })
     }
 }

@@ -14,13 +14,16 @@ import retrofit2.Response
 class MovieViewModel : ViewModel() {
     private var movieData = MutableLiveData<List<Movie>>()
     private var status = MutableLiveData<Boolean>()
+    private val movieService by lazy {
+        ApiRepository.getMovieService()
+    }
 
     init {
         fetchMovie()
     }
 
     private fun fetchMovie() {
-        ApiRepository().getMovieService().discoverMovies(BuildConfig.TMDB_API_KEY)
+        movieService.discoverMovies(BuildConfig.TMDB_API_KEY)
             .enqueue(object : Callback<Movies> {
                 override fun onFailure(call: Call<Movies>, t: Throwable) {
                     status.value = false

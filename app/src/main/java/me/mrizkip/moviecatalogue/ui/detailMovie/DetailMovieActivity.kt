@@ -51,26 +51,26 @@ class DetailMovieActivity : AppCompatActivity() {
             detailMovie_progressBar?.visibility = View.GONE
         })
 
-        viewModel.getDetailMovieData().observe(this, Observer { movie ->
+        viewModel.getMovieData().observe(this, Observer { movie ->
             movie?.let {
-                detailMovie_tvTitle.text = movie.title
-                detailMovie_tvDescription.text = movie.overview
-                detailMovie_tvReleaseDate.text = movie.releaseDate
-                detailMovie_tvUserRating.text = movie.voteAverage.toString()
-                detailMovie_tvGenre.text = movie.genres?.get(0)?.name
-                detailMovie_tvRuntime.text = movie.runtime.toString()
-                val moviePosterUrl = "https://image.tmdb.org/t/p/w500"
-                Picasso.get().load("$moviePosterUrl${movie.posterPath}").resize(100, 140)
+                detailMovie_tvTitle.text = it.title
+                detailMovie_tvDescription.text = it.overview
+                detailMovie_tvReleaseDate.text = it.releaseDate
+                detailMovie_tvUserRating.text = it.voteAverage.toString()
+                detailMovie_tvGenre.text = it.genres?.get(0)?.name
+                detailMovie_tvRuntime.text = it.runtime.toString()
+                val moviePosterUrl = resources.getString(R.string.poster_url_huge)
+                Picasso.get().load("$moviePosterUrl${it.posterPath}").resize(100, 140)
                     .centerCrop()
                     .into(detailMovie_imvPoster)
                 detailMovie_imvCover.post {
                     val width = detailMovie_imvCover.width
                     val height = detailMovie_imvCover.height
-                    Picasso.get().load("$moviePosterUrl${movie.posterPath}").resize(width, height)
+                    Picasso.get().load("$moviePosterUrl${it.posterPath}").resize(width, height)
                         .centerCrop()
                         .into(detailMovie_imvCover)
                 }
-                val userRating = movie.voteAverage!!.toFloat()
+                val userRating = it.voteAverage!!.toFloat()
                 when {
                     userRating >= 7 -> detailMovie_tvUserRating.background =
                         ContextCompat.getDrawable(this, R.drawable.background_rating_good_detail)

@@ -13,13 +13,16 @@ import retrofit2.Response
 class DetailMovieViewModel(movieId: String) : ViewModel() {
     private var movieData = MutableLiveData<Movie>()
     private var status = MutableLiveData<Boolean>()
+    private val movieService by lazy {
+        ApiRepository.getMovieService()
+    }
 
     init {
         fetchDetailMovie(movieId)
     }
 
     private fun fetchDetailMovie(movieId: String) {
-        ApiRepository().getMovieService().getDetailMovie(movieId, BuildConfig.TMDB_API_KEY)
+        movieService.getDetailMovie(movieId, BuildConfig.TMDB_API_KEY)
             .enqueue(object : Callback<Movie> {
                 override fun onFailure(call: Call<Movie>, t: Throwable) {
                     status.value = false
@@ -35,7 +38,6 @@ class DetailMovieViewModel(movieId: String) : ViewModel() {
                         movieData.value = null
                     }
                 }
-
             })
     }
 
@@ -43,7 +45,7 @@ class DetailMovieViewModel(movieId: String) : ViewModel() {
         return status
     }
 
-    fun getDetailMovieData(): LiveData<Movie> {
+    fun getMovieData(): LiveData<Movie> {
         return movieData
     }
 }
