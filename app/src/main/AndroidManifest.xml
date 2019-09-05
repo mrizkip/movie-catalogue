@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.mrizkip.moviecatalogue">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,13 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".tvShow.DetailTvShowActivity"
+            android:name="me.mrizkip.moviecatalogue.ui.detailTvShow.DetailTvShowActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
-            android:name=".movie.DetailMovieActivity"
+            android:name="me.mrizkip.moviecatalogue.ui.detailMovie.DetailMovieActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
-            android:name=".main.MainActivity"
+            android:name="me.mrizkip.moviecatalogue.ui.main.MainActivity"
             android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +26,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".language.LanguageActivity" />
     </application>
 
 </manifest>

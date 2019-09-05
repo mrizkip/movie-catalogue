@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".tvShow.DetailTvShowActivity">
+    tools:context=".ui.detailTvShow.DetailTvShowActivity">
 
     <ImageView
         android:id="@+id/detailTvShow_imvCover"
@@ -185,5 +185,41 @@
         app:layout_constraintTop_toBottomOf="@id/detailTvShow_tvAbout"
         app:layout_constraintVertical_bias="0.0"
         tools:text="@tools:sample/lorem/random" />
+
+    <ProgressBar
+        android:id="@+id/detailTvShow_progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/detailTvShow_error"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detailTvShow_tvAbout">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/spacing_huge"
+            android:contentDescription="@string/tv_show_fragment_error_icon"
+            android:src="@drawable/ic_cloud_off_24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/tv_show_fragment_error_message"
+            android:textSize="18sp" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

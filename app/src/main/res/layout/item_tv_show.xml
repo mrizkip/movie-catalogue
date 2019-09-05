@@ -67,54 +67,20 @@
             tools:text="@tools:sample/date/ddmmyy" />
 
         <TextView
-            android:id="@+id/itemTvShow_tvSeasons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_small"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:layout_marginBottom="@dimen/spacing_small"
-            android:background="@drawable/background_genre"
-            android:drawablePadding="@dimen/spacing_tiny"
-            android:paddingStart="@dimen/spacing_tiny"
-            android:paddingEnd="@dimen/spacing_tiny"
-            android:textColor="@color/textPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/itemTvShow_imvPoster"
-            app:layout_constraintTop_toBottomOf="@id/itemTvShow_tvDescription"
-            tools:text="10 Seasons" />
-
-        <TextView
-            android:id="@+id/itemTvShow_tvGenre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_small"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:layout_marginBottom="@dimen/spacing_small"
-            android:background="@drawable/background_genre"
-            android:paddingStart="@dimen/spacing_tiny"
-            android:paddingEnd="@dimen/spacing_tiny"
-            android:textColor="@color/textPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/itemTvShow_tvSeasons"
-            app:layout_constraintTop_toBottomOf="@id/itemTvShow_tvDescription"
-            tools:text="Action" />
-
-
-        <TextView
             android:id="@+id/itemTvShow_tvDescription"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="@dimen/spacing_small"
             android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_small"
             android:layout_marginBottom="@dimen/spacing_small"
             android:ellipsize="end"
-            android:maxLines="2"
+            android:maxLines="3"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/itemTvShow_imvPoster"
             app:layout_constraintTop_toBottomOf="@id/itemTvShow_tvReleaseDate"
+            app:layout_constraintVertical_bias="0.0"
             tools:text="@tools:sample/lorem/random" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

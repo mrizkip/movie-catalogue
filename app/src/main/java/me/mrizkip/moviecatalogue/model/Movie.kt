@@ -1,15 +1,31 @@
 package me.mrizkip.moviecatalogue.model
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import com.google.gson.annotations.SerializedName
 
-@Parcelize
 data class Movie(
-    var title: String = "",
-    var description: String = "",
-    var releaseDate: String = "",
-    var userRating: String = "",
-    var poster: Int = 0,
-    var runtime: String = "",
-    var genre: String = ""
-) : Parcelable
+    @SerializedName("backdrop_path")
+    var backdropPath: String? = null,
+    @SerializedName("genres")
+    var genres: List<Genre?>? = null,
+    @SerializedName("id")
+    var id: Int? = null,
+    @SerializedName("overview")
+    var overview: String? = null,
+    @SerializedName("poster_path")
+    var posterPath: String? = null,
+    @SerializedName("release_date")
+    var releaseDate: String? = null,
+    @SerializedName("runtime")
+    var runtime: Int? = null,
+    @SerializedName("title")
+    var title: String? = null,
+    @SerializedName("vote_average")
+    var voteAverage: Double? = null
+) {
+    data class Genre(
+        @SerializedName("id")
+        var id: Int? = null,
+        @SerializedName("name")
+        var name: String? = null
+    )
+}

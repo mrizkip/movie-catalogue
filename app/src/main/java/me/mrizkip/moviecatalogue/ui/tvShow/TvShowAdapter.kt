@@ -1,4 +1,4 @@
-package me.mrizkip.moviecatalogue.tvShow
+package me.mrizkip.moviecatalogue.ui.tvShow
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -37,11 +37,11 @@ class TvShowAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindView(tvShow: TvShow) {
-            itemView.itemTvShow_tvTitle.text = tvShow.title
-            itemView.itemTvShow_tvDescription.text = tvShow.description
-            itemView.itemTvShow_tvReleaseDate.text = tvShow.releaseDate
-            itemView.itemTvShow_tvRating.text = tvShow.userRating
-            val userRating = tvShow.userRating.toFloat()
+            itemView.itemTvShow_tvTitle.text = tvShow.name
+            itemView.itemTvShow_tvDescription.text = tvShow.overview
+            itemView.itemTvShow_tvReleaseDate.text = tvShow.firstAirDate
+            itemView.itemTvShow_tvRating.text = tvShow.voteAverage.toString()
+            val userRating = tvShow.voteAverage!!.toFloat()
             when {
                 userRating >= 7 -> itemView.itemTvShow_tvRating.background =
                     ContextCompat.getDrawable(itemView.context, R.drawable.background_rating_good)
@@ -50,11 +50,9 @@ class TvShowAdapter(
                 userRating < 4 -> itemView.itemTvShow_tvRating.background =
                     ContextCompat.getDrawable(itemView.context, R.drawable.background_rating_bad)
             }
-            Picasso.get().load(tvShow.poster).resize(100, 140).centerCrop()
+            val tvShowPosterUrl = context?.resources?.getString(R.string.poster_url_small)
+            Picasso.get().load("$tvShowPosterUrl${tvShow.posterPath}").resize(100, 140).centerCrop()
                 .into(itemView.itemTvShow_imvPoster)
-            val season = context?.getString(R.string.tv_show_adapter_seasons, tvShow.seasons)
-            itemView.itemTvShow_tvSeasons.text = season
-            itemView.itemTvShow_tvGenre.text = tvShow.genre
         }
     }
 }
