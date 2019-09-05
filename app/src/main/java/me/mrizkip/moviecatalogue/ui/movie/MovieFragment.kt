@@ -3,6 +3,7 @@ package me.mrizkip.moviecatalogue.ui.movie
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_movie.view.*
 import me.mrizkip.moviecatalogue.R
 import me.mrizkip.moviecatalogue.model.Movie
+import me.mrizkip.moviecatalogue.ui.detailMovie.DetailMovieActivity
 
 class MovieFragment : Fragment() {
     private var movieList: ArrayList<Movie> = arrayListOf()
@@ -36,6 +38,8 @@ class MovieFragment : Fragment() {
             setHasFixedSize(true)
         }
 
+        viewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
+
         adapter = MovieAdapter(context, movieList) {
             val intent = Intent(context, DetailMovieActivity::class.java)
                 .putExtra(DetailMovieActivity.EXTRA_MOVIE_ID, it.id)
@@ -49,8 +53,8 @@ class MovieFragment : Fragment() {
 
     private fun getMovieData() {
         movieList.clear()
-        viewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
 
+        Handler().post { view?.movie_progressBar?.visibility = View.VISIBLE }
         viewModel.getStatus().observe(this, Observer { status ->
             if (status) {
                 view?.movie_error?.visibility = View.GONE
@@ -59,6 +63,7 @@ class MovieFragment : Fragment() {
                 view?.movie_error?.visibility = View.VISIBLE
                 view?.movie_recyclerView?.visibility = View.GONE
             }
+            view?.movie_progressBar?.visibility = View.GONE
         })
 
         viewModel.getMovieData().observe(this, Observer { movies ->
