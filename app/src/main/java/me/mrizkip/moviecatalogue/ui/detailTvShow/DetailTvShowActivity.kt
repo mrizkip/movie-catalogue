@@ -6,10 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail_tv_show.*
 import me.mrizkip.moviecatalogue.R
-import me.mrizkip.moviecatalogue.ui.universalViewModelFactory
+import me.mrizkip.moviecatalogue.model.FavoriteTvShow
+import me.mrizkip.moviecatalogue.model.TvShow
+import me.mrizkip.moviecatalogue.ui.common.universalViewModelFactory
+import me.mrizkip.moviecatalogue.util.database
+import org.jetbrains.anko.db.insert
+import java.sql.SQLClientInfoException
 
 class DetailTvShowActivity : AppCompatActivity() {
 
@@ -18,6 +24,7 @@ class DetailTvShowActivity : AppCompatActivity() {
     }
 
     private lateinit var viewModel: DetailTvShowViewModel
+    private var mTvShow: TvShow? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +40,11 @@ class DetailTvShowActivity : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(
             this,
-            universalViewModelFactory { DetailTvShowViewModel(tvShowId.toString()) })
+            universalViewModelFactory {
+                DetailTvShowViewModel(
+                    tvShowId.toString()
+                )
+            })
             .get(DetailTvShowViewModel::class.java)
 
         fetchDetailTvShow()
@@ -85,5 +96,28 @@ class DetailTvShowActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return true
+    }
+
+    private fun addFavorite() {
+        try {
+            database.use {
+                insert(
+                    FavoriteTvShow.TABLE_FAVORITE_TV_SHOW,
+                    FavoriteTvShow.TV_SHOW_ID to mTvShow?.id,
+                    FavoriteTvShow.NAME to mTvShow?.name,
+                    FavoriteTvShow.OVERVIEW to mTvShow?.overview,
+                    FavoriteTvShow.FIRST_AIR_DATE to mTvShow?.firstAirDate,
+                    FavoriteTvShow.GENRE to mTvShow?.genres?.get(0),
+                    FavoriteTvShow.NUMBER_OF_SEASONS to mTvShow?.numberOfSeasons,
+                    FavoriteTvShow.POSTER_PATH to mTvShow?.posterPath,
+                    FavoriteTvShow.VOTE_AVERAGE to mTvShow?.voteAverage
+                )
+            }
+            val content: View = findViewById(android.R.id.content)
+            Snackbar.make(content, "Added to favorite", Snackbar.LENGTH_SHORT).show()
+        } catch (err: SQLClientInfoException) {
+            val content: View = findViewById(android.R.id.content)
+            Snackbar.make(content, err.localizedMessage, Snackbar.LENGTH_SHORT).show()
+        }
     }
 }

@@ -6,10 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail_movie.*
 import me.mrizkip.moviecatalogue.R
-import me.mrizkip.moviecatalogue.ui.universalViewModelFactory
+import me.mrizkip.moviecatalogue.model.FavoriteMovie
+import me.mrizkip.moviecatalogue.model.Movie
+import me.mrizkip.moviecatalogue.ui.common.universalViewModelFactory
+import me.mrizkip.moviecatalogue.util.database
+import org.jetbrains.anko.db.insert
+import java.sql.SQLClientInfoException
 
 class DetailMovieActivity : AppCompatActivity() {
 
@@ -18,6 +24,7 @@ class DetailMovieActivity : AppCompatActivity() {
     }
 
     private lateinit var viewModel: DetailMovieViewModel
+    private var mMovie: Movie? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +40,11 @@ class DetailMovieActivity : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(
             this,
-            universalViewModelFactory { DetailMovieViewModel(movieId.toString()) })
+            universalViewModelFactory {
+                DetailMovieViewModel(
+                    movieId.toString()
+                )
+            })
             .get(DetailMovieViewModel::class.java)
 
         fetchDetailMovie()
@@ -53,6 +64,7 @@ class DetailMovieActivity : AppCompatActivity() {
 
         viewModel.getMovieData().observe(this, Observer { movie ->
             movie?.let {
+                mMovie = movie
                 detailMovie_tvTitle.text = it.title
                 detailMovie_tvDescription.text = it.overview
                 detailMovie_tvReleaseDate.text = it.releaseDate
@@ -87,5 +99,29 @@ class DetailMovieActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return true
+    }
+
+    private fun addFavorite() {
+        try {
+            database.use {
+                insert(
+                    FavoriteMovie.TABLE_FAVORITE_MOVIE,
+                    FavoriteMovie.MOVIE_ID to mMovie?.id,
+                    FavoriteMovie.TITLE to mMovie?.title,
+                    FavoriteMovie.OVERVIEW to mMovie?.overview,
+                    FavoriteMovie.BACKDROP_PATH to mMovie?.backdropPath,
+                    FavoriteMovie.GENRE to mMovie?.genres?.get(0),
+                    FavoriteMovie.POSTER_PATH to mMovie?.posterPath,
+                    FavoriteMovie.RELEASE_DATE to mMovie?.releaseDate,
+                    FavoriteMovie.RUNTIME to mMovie?.runtime,
+                    FavoriteMovie.VOTE_AVERAGE to mMovie?.voteAverage
+                )
+            }
+            val content: View = findViewById(android.R.id.content)
+            Snackbar.make(content, "Added to favorite", Snackbar.LENGTH_SHORT).show()
+        } catch (err: SQLClientInfoException) {
+            val content: View = findViewById(android.R.id.content)
+            Snackbar.make(content, err.localizedMessage, Snackbar.LENGTH_SHORT).show()
+        }
     }
 }
