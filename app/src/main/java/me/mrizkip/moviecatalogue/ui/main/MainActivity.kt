@@ -6,9 +6,13 @@ import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_main.*
 import me.mrizkip.moviecatalogue.R
+import me.mrizkip.moviecatalogue.model.FavoriteTvShow
+import me.mrizkip.moviecatalogue.ui.favorite.FavoriteFragment
 import me.mrizkip.moviecatalogue.ui.movie.MovieFragment
 import me.mrizkip.moviecatalogue.ui.tvShow.TvShowFragment
 
@@ -21,13 +25,29 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(main_toolbar)
         supportActionBar?.title = "Movie Catalogue"
 
-        setupViewPager(main_viewPager)
-        main_tabLayout.setupWithViewPager(main_viewPager)
+        main_bottomNavigation.setOnNavigationItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.bottomMenu_movies -> loadFragment(MovieFragment(), savedInstanceState)
+                R.id.bottomMenu_tvShows -> loadFragment(TvShowFragment(), savedInstanceState)
+                R.id.bottomMenu_favorites -> loadFragment(FavoriteFragment(), savedInstanceState)
+            }
+            true
+        }
+        main_bottomNavigation.selectedItemId = R.id.bottomMenu_movies
+    }
+
+    private fun loadFragment(fragment: Fragment, savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.main_content, fragment)
+                .commit()
+        }
     }
 
     private fun setupViewPager(viewPager: ViewPager?) {
         val viewPagerAdapter =
-            MainViewPagerAdapter(this, supportFragmentManager)
+            MainViewPagerAdapter(this, supportFragmentManager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
         val movieFragment = MovieFragment()
         val tvShowFragment = TvShowFragment()
 
@@ -43,8 +63,8 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == R.id.menuMain_language) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menuMain_language) {
             val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
             startActivity(intent)
         }

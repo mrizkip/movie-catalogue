@@ -117,7 +117,7 @@ class DetailTvShowActivity : AppCompatActivity() {
             Snackbar.make(content, "Added to favorite", Snackbar.LENGTH_SHORT).show()
         } catch (err: SQLClientInfoException) {
             val content: View = findViewById(android.R.id.content)
-            Snackbar.make(content, err.localizedMessage, Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(content, err.localizedMessage as CharSequence, Snackbar.LENGTH_SHORT).show()
         }
     }
 }
