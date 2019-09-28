@@ -16,11 +16,15 @@ import me.mrizkip.moviecatalogue.model.FavoriteMovie
 import me.mrizkip.moviecatalogue.model.Movie
 import me.mrizkip.moviecatalogue.ui.common.universalViewModelFactory
 import me.mrizkip.moviecatalogue.util.database
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.db.select
+import org.jetbrains.anko.info
 import java.sql.SQLClientInfoException
 
-class DetailMovieActivity : AppCompatActivity() {
+class DetailMovieActivity : AppCompatActivity(), AnkoLogger {
 
     companion object {
         const val EXTRA_MOVIE_ID = "EXTRA_MOVIE_ID"
@@ -66,6 +70,8 @@ class DetailMovieActivity : AppCompatActivity() {
             }
             detailMovie_progressBar?.visibility = View.GONE
         })
+        getFavorite()
+        setFavoriteMenu()
 
         viewModel.getMovieData().observe(this, Observer { movie ->
             movie?.let {
@@ -113,11 +119,11 @@ class DetailMovieActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.menuDetail_addToFavorite -> {
                 mMovie?.let {
                     if (!favorited) addFavorite() else removeFromFavorite()
-                    favorited != favorited
+                    favorited = !favorited
                     setFavoriteMenu()
                 }
                 true
@@ -147,7 +153,8 @@ class DetailMovieActivity : AppCompatActivity() {
             Snackbar.make(content, "Added to favorite", Snackbar.LENGTH_SHORT).show()
         } catch (err: SQLClientInfoException) {
             val content: View = findViewById(android.R.id.content)
-            Snackbar.make(content, err.localizedMessage as CharSequence, Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(content, err.localizedMessage as CharSequence, Snackbar.LENGTH_SHORT)
+                .show()
         }
     }
 
@@ -163,14 +170,34 @@ class DetailMovieActivity : AppCompatActivity() {
             Snackbar.make(content, "Removed to favorite", Snackbar.LENGTH_SHORT).show()
         } catch (err: SQLClientInfoException) {
             val content: View = findViewById(android.R.id.content)
-            Snackbar.make(content, err.localizedMessage as CharSequence, Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(content, err.localizedMessage as CharSequence, Snackbar.LENGTH_SHORT)
+                .show()
         }
     }
 
     private fun setFavoriteMenu() {
+        info("Favorited: $favorited")
         if (favorited)
-            mMenu?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_added_to_favorite)
+            mMenu?.getItem(0)?.icon =
+                ContextCompat.getDrawable(this, R.drawable.ic_added_to_favorite)
         else
             mMenu?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_add_to_favorite)
+    }
+
+    private fun getFavorite() {
+        try {
+            database.use {
+                val result = select(FavoriteMovie.TABLE_FAVORITE_MOVIE)
+                    .whereArgs(
+                        "(MOVIE_ID = {id})",
+                        "id" to mMovie?.id.toString()
+                    )
+                val favorite = result.parseList(classParser<FavoriteMovie>())
+                if (favorite.isNotEmpty()) favorited = true
+            }
+        } catch (e: SQLClientInfoException) {
+            val content: View = findViewById(android.R.id.content)
+            Snackbar.make(content, e.localizedMessage as CharSequence, Snackbar.LENGTH_SHORT).show()
+        }
     }
 }
