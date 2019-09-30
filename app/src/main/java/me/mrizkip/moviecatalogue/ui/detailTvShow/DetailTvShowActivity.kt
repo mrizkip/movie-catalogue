@@ -32,6 +32,7 @@ class DetailTvShowActivity : AppCompatActivity() {
     private var mTvShow: TvShow? = null
     private var mMenu: Menu? = null
     private var favorited: Boolean = false
+    private var tvShowId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +44,7 @@ class DetailTvShowActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        val tvShowId: Int = intent.getIntExtra(EXTRA_TV_SHOW_ID, -1)
+        tvShowId = intent.getIntExtra(EXTRA_TV_SHOW_ID, -1)
 
         viewModel = ViewModelProviders.of(
             this,
@@ -67,11 +68,12 @@ class DetailTvShowActivity : AppCompatActivity() {
             }
             detailTvShow_progressBar?.visibility = View.GONE
         })
-        getFavorite()
-        setFavoriteMenu()
 
         viewModel.getTvShowData().observe(this, Observer { tvShow ->
             tvShow?.let {
+                getFavorite()
+                setFavoriteMenu()
+                mTvShow = it
                 detailTvShow_tvTitle.text = it.name
                 detailTvShow_tvDescription.text = it.overview
                 detailTvShow_tvReleaseDate.text = it.firstAirDate
@@ -137,7 +139,7 @@ class DetailTvShowActivity : AppCompatActivity() {
                     FavoriteTvShow.NAME to mTvShow?.name,
                     FavoriteTvShow.OVERVIEW to mTvShow?.overview,
                     FavoriteTvShow.FIRST_AIR_DATE to mTvShow?.firstAirDate,
-                    FavoriteTvShow.GENRE to mTvShow?.genres?.get(0),
+                    FavoriteTvShow.GENRE to mTvShow?.genres?.get(0)?.name,
                     FavoriteTvShow.NUMBER_OF_SEASONS to mTvShow?.numberOfSeasons,
                     FavoriteTvShow.POSTER_PATH to mTvShow?.posterPath,
                     FavoriteTvShow.VOTE_AVERAGE to mTvShow?.voteAverage
@@ -156,7 +158,7 @@ class DetailTvShowActivity : AppCompatActivity() {
             database.use {
                 delete(
                     FavoriteTvShow.TABLE_FAVORITE_TV_SHOW, "(TV_SHOW_ID = {id})",
-                    "id" to mTvShow?.id.toString()
+                    "id" to tvShowId
                 )
             }
             val content: View = findViewById(android.R.id.content)
@@ -180,7 +182,7 @@ class DetailTvShowActivity : AppCompatActivity() {
                 val result = select(FavoriteTvShow.TABLE_FAVORITE_TV_SHOW)
                     .whereArgs(
                         "(TV_SHOW_ID = {id})",
-                        "id" to mTvShow?.id.toString()
+                        "id" to tvShowId
                     )
                 val favorite = result.parseList(classParser<FavoriteTvShow>())
                 if (favorite.isNotEmpty()) favorited = true

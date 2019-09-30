@@ -16,15 +16,13 @@ import me.mrizkip.moviecatalogue.model.FavoriteMovie
 import me.mrizkip.moviecatalogue.model.Movie
 import me.mrizkip.moviecatalogue.ui.common.universalViewModelFactory
 import me.mrizkip.moviecatalogue.util.database
-import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
-import org.jetbrains.anko.info
 import java.sql.SQLClientInfoException
 
-class DetailMovieActivity : AppCompatActivity(), AnkoLogger {
+class DetailMovieActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_MOVIE_ID = "EXTRA_MOVIE_ID"
@@ -34,6 +32,7 @@ class DetailMovieActivity : AppCompatActivity(), AnkoLogger {
     private var mMovie: Movie? = null
     private var mMenu: Menu? = null
     private var favorited: Boolean = false
+    private var movieId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +44,7 @@ class DetailMovieActivity : AppCompatActivity(), AnkoLogger {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        val movieId: Int = intent.getIntExtra(EXTRA_MOVIE_ID, -1)
+        movieId = intent.getIntExtra(EXTRA_MOVIE_ID, -1)
 
         viewModel = ViewModelProviders.of(
             this,
@@ -70,12 +69,13 @@ class DetailMovieActivity : AppCompatActivity(), AnkoLogger {
             }
             detailMovie_progressBar?.visibility = View.GONE
         })
-        getFavorite()
-        setFavoriteMenu()
+
 
         viewModel.getMovieData().observe(this, Observer { movie ->
             movie?.let {
-                mMovie = movie
+                getFavorite()
+                setFavoriteMenu()
+                mMovie = it
                 detailMovie_tvTitle.text = it.title
                 detailMovie_tvDescription.text = it.overview
                 detailMovie_tvReleaseDate.text = it.releaseDate
@@ -163,11 +163,11 @@ class DetailMovieActivity : AppCompatActivity(), AnkoLogger {
             database.use {
                 delete(
                     FavoriteMovie.TABLE_FAVORITE_MOVIE, "(MOVIE_ID = {id})",
-                    "id" to mMovie?.id.toString()
+                    "id" to movieId
                 )
             }
             val content: View = findViewById(android.R.id.content)
-            Snackbar.make(content, "Removed to favorite", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(content, "Removed from favorite", Snackbar.LENGTH_SHORT).show()
         } catch (err: SQLClientInfoException) {
             val content: View = findViewById(android.R.id.content)
             Snackbar.make(content, err.localizedMessage as CharSequence, Snackbar.LENGTH_SHORT)
@@ -176,7 +176,6 @@ class DetailMovieActivity : AppCompatActivity(), AnkoLogger {
     }
 
     private fun setFavoriteMenu() {
-        info("Favorited: $favorited")
         if (favorited)
             mMenu?.getItem(0)?.icon =
                 ContextCompat.getDrawable(this, R.drawable.ic_added_to_favorite)
@@ -190,7 +189,7 @@ class DetailMovieActivity : AppCompatActivity(), AnkoLogger {
                 val result = select(FavoriteMovie.TABLE_FAVORITE_MOVIE)
                     .whereArgs(
                         "(MOVIE_ID = {id})",
-                        "id" to mMovie?.id.toString()
+                        "id" to movieId
                     )
                 val favorite = result.parseList(classParser<FavoriteMovie>())
                 if (favorite.isNotEmpty()) favorited = true

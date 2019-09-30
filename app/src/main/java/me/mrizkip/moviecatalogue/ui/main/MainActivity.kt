@@ -11,8 +11,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_main.*
 import me.mrizkip.moviecatalogue.R
-import me.mrizkip.moviecatalogue.model.FavoriteTvShow
 import me.mrizkip.moviecatalogue.ui.favorite.FavoriteFragment
+import me.mrizkip.moviecatalogue.ui.favorite.FavoritePagerAdapter
 import me.mrizkip.moviecatalogue.ui.movie.MovieFragment
 import me.mrizkip.moviecatalogue.ui.tvShow.TvShowFragment
 
@@ -47,7 +47,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViewPager(viewPager: ViewPager?) {
         val viewPagerAdapter =
-            MainViewPagerAdapter(this, supportFragmentManager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
+            FavoritePagerAdapter(
+                this,
+                supportFragmentManager,
+                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+            )
         val movieFragment = MovieFragment()
         val tvShowFragment = TvShowFragment()
 
