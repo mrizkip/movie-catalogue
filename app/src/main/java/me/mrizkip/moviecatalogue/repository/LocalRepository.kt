@@ -7,11 +7,11 @@ import me.mrizkip.moviecatalogue.util.database
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
 
-class LocalRepository(private val context: Context) {
+class LocalRepository(private val context: Context?) {
 
     fun getFavoriteMovies(): List<FavoriteMovie> {
         var movieList: List<FavoriteMovie> = arrayListOf()
-        context.database.use {
+        context?.database?.use {
             val result = select(FavoriteMovie.TABLE_FAVORITE_MOVIE)
             movieList = result.parseList(classParser())
         }
@@ -20,7 +20,7 @@ class LocalRepository(private val context: Context) {
 
     fun getFavoriteTvShows(): List<FavoriteTvShow> {
         var tvShowList: List<FavoriteTvShow> = arrayListOf()
-        context.database.use {
+        context?.database?.use {
             val result = select(FavoriteTvShow.TABLE_FAVORITE_TV_SHOW)
             tvShowList = result.parseList(classParser())
         }

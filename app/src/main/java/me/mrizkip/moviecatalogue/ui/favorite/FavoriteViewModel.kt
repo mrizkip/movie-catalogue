@@ -26,6 +26,7 @@ class FavoriteViewModel(private val localRepository: LocalRepository) : ViewMode
             mMovie.overview = movie.overview
             mMovie.posterPath = movie.posterPath
             mMovie.releaseDate = movie.releaseDate
+            mMovie.voteAverage = movie.voteAverage?.toDouble()
 
             movieList.add(mMovie)
         }
@@ -41,7 +42,8 @@ class FavoriteViewModel(private val localRepository: LocalRepository) : ViewMode
             mTvShow.name = tvShow.name
             mTvShow.overview = tvShow.overview
             mTvShow.posterPath = tvShow.posterPath
-            mTvShow.firstAirDate = mTvShow.firstAirDate
+            mTvShow.firstAirDate = tvShow.firstAirDate
+            mTvShow.voteAverage = tvShow.voteAverage?.toDouble()
 
             tvShowList.add(mTvShow)
         }

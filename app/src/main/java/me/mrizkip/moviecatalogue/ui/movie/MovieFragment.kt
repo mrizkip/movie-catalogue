@@ -37,7 +37,7 @@ class MovieFragment : Fragment() {
             setHasFixedSize(true)
         }
 
-        viewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(MovieViewModel::class.java)
 
         adapter = MovieAdapter(context, movieList) {
             val intent = Intent(context, DetailMovieActivity::class.java)

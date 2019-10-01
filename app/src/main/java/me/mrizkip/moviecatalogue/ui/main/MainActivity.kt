@@ -27,22 +27,26 @@ class MainActivity : AppCompatActivity() {
 
         main_bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when(item.itemId) {
-                R.id.bottomMenu_movies -> loadFragment(MovieFragment(), savedInstanceState)
-                R.id.bottomMenu_tvShows -> loadFragment(TvShowFragment(), savedInstanceState)
-                R.id.bottomMenu_favorites -> loadFragment(FavoriteFragment(), savedInstanceState)
+                R.id.bottomMenu_movies -> loadFragment(MovieFragment())
+                R.id.bottomMenu_tvShows -> loadFragment(TvShowFragment())
+                R.id.bottomMenu_favorites -> loadFragment(FavoriteFragment())
             }
             true
         }
         main_bottomNavigation.selectedItemId = R.id.bottomMenu_movies
     }
 
-    private fun loadFragment(fragment: Fragment, savedInstanceState: Bundle?) {
-        if (savedInstanceState == null) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.main_content, fragment)
-                .commit()
-        }
+    private fun loadFragment(fragment: Fragment) {
+//        if (savedInstanceState == null) {
+//            supportFragmentManager
+//                .beginTransaction()
+//                .replace(R.id.main_content, fragment)
+//                .commit()
+//        }
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.main_content, fragment)
+            .commit()
     }
 
     private fun setupViewPager(viewPager: ViewPager?) {

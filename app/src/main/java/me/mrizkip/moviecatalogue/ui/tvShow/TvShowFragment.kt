@@ -36,7 +36,7 @@ class TvShowFragment : Fragment() {
             setHasFixedSize(true)
         }
 
-        viewModel = ViewModelProviders.of(this).get(TvShowViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(TvShowViewModel::class.java)
 
         adapter = TvShowAdapter(context, tvShowList) {
             val intent = Intent(context, DetailTvShowActivity::class.java)
