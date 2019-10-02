@@ -2,21 +2,21 @@ package me.mrizkip.moviecatalogue.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_main.*
 import me.mrizkip.moviecatalogue.R
 import me.mrizkip.moviecatalogue.ui.favorite.FavoriteFragment
-import me.mrizkip.moviecatalogue.ui.favorite.FavoritePagerAdapter
 import me.mrizkip.moviecatalogue.ui.movie.MovieFragment
 import me.mrizkip.moviecatalogue.ui.tvShow.TvShowFragment
 
 class MainActivity : AppCompatActivity() {
+
+    private var selectedItem: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,44 +26,30 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = "Movie Catalogue"
 
         main_bottomNavigation.setOnNavigationItemSelectedListener { item ->
-            when(item.itemId) {
+            when (item.itemId) {
                 R.id.bottomMenu_movies -> loadFragment(MovieFragment())
                 R.id.bottomMenu_tvShows -> loadFragment(TvShowFragment())
                 R.id.bottomMenu_favorites -> loadFragment(FavoriteFragment())
             }
             true
         }
-        main_bottomNavigation.selectedItemId = R.id.bottomMenu_movies
+        if (savedInstanceState != null) {
+            main_bottomNavigation.selectedItemId = selectedItem
+        } else {
+            main_bottomNavigation.selectedItemId = R.id.bottomMenu_movies
+        }
     }
 
     private fun loadFragment(fragment: Fragment) {
-//        if (savedInstanceState == null) {
-//            supportFragmentManager
-//                .beginTransaction()
-//                .replace(R.id.main_content, fragment)
-//                .commit()
-//        }
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.main_content, fragment)
             .commit()
     }
 
-    private fun setupViewPager(viewPager: ViewPager?) {
-        val viewPagerAdapter =
-            FavoritePagerAdapter(
-                this,
-                supportFragmentManager,
-                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-            )
-        val movieFragment = MovieFragment()
-        val tvShowFragment = TvShowFragment()
-
-        viewPagerAdapter.addFragment(movieFragment)
-        viewPagerAdapter.addFragment(tvShowFragment)
-
-        viewPager?.adapter = viewPagerAdapter
-        viewPager?.offscreenPageLimit = viewPagerAdapter.count - 1
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        selectedItem = main_bottomNavigation.selectedItemId
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

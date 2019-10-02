@@ -57,6 +57,11 @@ class FavoriteTvShowFragment : Fragment() {
         getFavoriteTvShows()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchFavoriteTvShows()
+    }
+
     private fun getFavoriteTvShows() {
         view?.favoriteTvShow_progressBar?.visibility = View.VISIBLE
 

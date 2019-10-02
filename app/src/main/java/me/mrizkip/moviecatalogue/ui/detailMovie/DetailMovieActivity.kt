@@ -150,7 +150,7 @@ class DetailMovieActivity : AppCompatActivity() {
                 )
             }
             val content: View = findViewById(android.R.id.content)
-            Snackbar.make(content, "Added to favorite", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(content, getString(R.string.detail_added_to_favorite), Snackbar.LENGTH_SHORT).show()
         } catch (err: SQLClientInfoException) {
             val content: View = findViewById(android.R.id.content)
             Snackbar.make(content, err.localizedMessage as CharSequence, Snackbar.LENGTH_SHORT)
@@ -167,7 +167,7 @@ class DetailMovieActivity : AppCompatActivity() {
                 )
             }
             val content: View = findViewById(android.R.id.content)
-            Snackbar.make(content, "Removed from favorite", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(content, getString(R.string.detail_removed_from_favorite), Snackbar.LENGTH_SHORT).show()
         } catch (err: SQLClientInfoException) {
             val content: View = findViewById(android.R.id.content)
             Snackbar.make(content, err.localizedMessage as CharSequence, Snackbar.LENGTH_SHORT)

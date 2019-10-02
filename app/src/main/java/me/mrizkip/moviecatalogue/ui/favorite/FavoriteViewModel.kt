@@ -16,7 +16,7 @@ class FavoriteViewModel(private val localRepository: LocalRepository) : ViewMode
         fetchFavoriteTvShows()
     }
 
-    private fun fetchFavoriteMovies() {
+    fun fetchFavoriteMovies() {
         val movieList: ArrayList<Movie> = arrayListOf()
         val favoriteMovies = localRepository.getFavoriteMovies()
         for (movie in favoriteMovies) {
@@ -33,7 +33,7 @@ class FavoriteViewModel(private val localRepository: LocalRepository) : ViewMode
         movieData.postValue(movieList)
     }
 
-    private fun fetchFavoriteTvShows() {
+    fun fetchFavoriteTvShows() {
         val tvShowList: ArrayList<TvShow> = arrayListOf()
         val favoriteTvShows = localRepository.getFavoriteTvShows()
         for (tvShow in favoriteTvShows) {

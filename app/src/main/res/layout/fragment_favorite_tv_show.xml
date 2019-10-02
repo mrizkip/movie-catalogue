@@ -37,19 +37,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/spacing_huge"
-            android:contentDescription="@string/tv_show_fragment_error_icon"
-            android:src="@drawable/ic_cloud_off_24dp" />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/tv_show_fragment_error_message"
+            android:text="@string/favoriteFragment_no_favorite"
             android:textSize="18sp" />
     </FrameLayout>
 

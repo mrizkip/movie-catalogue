@@ -43,4 +43,8 @@
     <string name="poster_url_small">https://image.tmdb.org/t/p/w185</string>
     <string name="poster_url_huge">https://image.tmdb.org/t/p/w500</string>
 
+    <string name="menu_detail_favorite">Favorite</string>
+    <string name="favoriteFragment_no_favorite">You haven\'t favorited any items yet</string>
+    <string name="detail_added_to_favorite">Added to favorite</string>
+    <string name="detail_removed_from_favorite">Removed from favorite</string>
 </resources>

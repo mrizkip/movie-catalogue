@@ -57,6 +57,11 @@ class FavoriteMovieFragment : Fragment() {
         getFavoriteMovies()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchFavoriteMovies()
+    }
+
     private fun getFavoriteMovies() {
         view?.favoriteMovie_progressBar?.visibility = View.VISIBLE
 
