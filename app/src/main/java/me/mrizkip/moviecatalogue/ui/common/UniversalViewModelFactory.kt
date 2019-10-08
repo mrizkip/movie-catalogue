@@ -1,4 +1,4 @@
-package me.mrizkip.moviecatalogue.ui
+package me.mrizkip.moviecatalogue.ui.common
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

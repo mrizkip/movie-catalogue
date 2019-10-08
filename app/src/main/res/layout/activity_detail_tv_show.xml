@@ -71,10 +71,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_normal"
         android:layout_marginEnd="@dimen/spacing_normal"
-        android:textColor="@color/white"
+        android:textColor="@color/textPrimary"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/detailTvShow_imvPoster"
-        app:layout_constraintTop_toBottomOf="@id/detailTvShow_tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/detailTvShow_imvCover"
         tools:text="@tools:sample/date/ddmmyy" />
 
     <TextView
@@ -90,7 +91,7 @@
         android:paddingEnd="@dimen/spacing_tiny"
         android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@id/detailTvShow_imvPoster"
-        app:layout_constraintTop_toBottomOf="@id/detailTvShow_imvCover"
+        app:layout_constraintTop_toBottomOf="@id/detailTvShow_tvReleaseDate"
         tools:text="@string/detail_tv_show_rating_number" />
 
     <TextView
@@ -103,7 +104,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/detailTvShow_tvUserRating"
-        app:layout_constraintTop_toBottomOf="@id/detailTvShow_imvCover" />
+        app:layout_constraintTop_toBottomOf="@id/detailTvShow_tvReleaseDate" />
 
     <TextView
         android:id="@+id/detailTvShow_genre"
@@ -169,7 +170,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detailTvShow_imvPoster" />
+        app:layout_constraintTop_toBottomOf="@id/detailTvShow_tvSeasons" />
 
     <TextView
         android:id="@+id/detailTvShow_tvDescription"

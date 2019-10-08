@@ -42,4 +42,10 @@
 
     <string name="poster_url_small">https://image.tmdb.org/t/p/w185</string>
     <string name="poster_url_huge">https://image.tmdb.org/t/p/w500</string>
+
+    <string name="menu_detail_favorite">Favorit</string>
+    <string name="favoriteFragment_no_favorite">Anda belum menyukai item apapun</string>
+    <string name="detail_added_to_favorite">Item ditambahkan di favorit</string>
+    <string name="detail_removed_from_favorite">Item dihapus dari favorit</string>
+
 </resources>

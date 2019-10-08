@@ -1,4 +1,4 @@
-package me.mrizkip.moviecatalogue.ui.main
+package me.mrizkip.moviecatalogue.ui.favorite
 
 import android.content.Context
 import androidx.fragment.app.Fragment
@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import me.mrizkip.moviecatalogue.R
 
-class MainViewPagerAdapter(context: Context, fragmentManager: FragmentManager?): FragmentPagerAdapter(fragmentManager) {
+class FavoritePagerAdapter(context: Context, fragmentManager: FragmentManager, behaviour: Int): FragmentPagerAdapter(fragmentManager, behaviour) {
     private val fragments = ArrayList<Fragment>()
     private val tabTitles = arrayOf(context.getString(R.string.tab_movies), context.getString(
         R.string.tab_tv_shows

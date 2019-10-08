@@ -70,11 +70,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="@dimen/spacing_normal"
-        android:textColor="@color/white"
+        android:textColor="@color/textPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/detailMovie_imvPoster"
-        app:layout_constraintTop_toBottomOf="@id/detailMovie_tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/detailMovie_imvCover"
         tools:text="@tools:sample/date/ddmmyy" />
 
     <TextView
@@ -90,7 +91,7 @@
         android:paddingEnd="@dimen/spacing_tiny"
         android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@id/detailMovie_imvPoster"
-        app:layout_constraintTop_toBottomOf="@id/detailMovie_imvCover"
+        app:layout_constraintTop_toBottomOf="@id/detailMovie_tvReleaseDate"
         tools:text="@string/detail_movie_rating_number" />
 
     <TextView
@@ -103,7 +104,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/detailMovie_tvUserRating"
-        app:layout_constraintTop_toBottomOf="@id/detailMovie_imvCover" />
+        app:layout_constraintTop_toBottomOf="@id/detailMovie_tvReleaseDate" />
 
     <TextView
         android:id="@+id/detailMovie_genre"
@@ -169,7 +170,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detailMovie_imvPoster" />
+        app:layout_constraintTop_toBottomOf="@id/detailMovie_tvRuntime" />
 
     <TextView
         android:id="@+id/detailMovie_tvDescription"
