@@ -22,7 +22,7 @@ class MovieViewModel : ViewModel() {
         fetchMovie()
     }
 
-    private fun fetchMovie() {
+    fun fetchMovie() {
         movieService.discoverMovies(BuildConfig.TMDB_API_KEY)
             .enqueue(object : Callback<Movies> {
                 override fun onFailure(call: Call<Movies>, t: Throwable) {

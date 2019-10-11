@@ -52,7 +52,7 @@ class MovieAdapter(
                 userRating < 4 -> itemView.itemMovie_tvRating.background =
                     ContextCompat.getDrawable(itemView.context, R.drawable.background_rating_bad)
             }
-            val moviePosterUrl = "https://image.tmdb.org/t/p/w185"
+            val moviePosterUrl = context?.resources?.getString(R.string.poster_url_small)
             Picasso.get().load("$moviePosterUrl${movie.posterPath}").resize(100, 140).centerCrop()
                 .into(itemView.itemMovie_imvPoster)
         }

@@ -3,6 +3,7 @@
     <string name="app_name">Movie Catalogue</string>
 
     <string name="menu_change_language">Ubah Bahasa</string>
+    <string name="menu_search">Pencarian</string>
 
     <string name="tab_movies">FILM</string>
     <string name="tab_tv_shows">SERIAL TV</string>

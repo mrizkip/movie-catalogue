@@ -22,7 +22,7 @@ class TvShowViewModel : ViewModel() {
         fetchTvShows()
     }
 
-    private fun fetchTvShows() {
+    fun fetchTvShows() {
         tvShowService.discoverTvShows(BuildConfig.TMDB_API_KEY)
             .enqueue(object : Callback<TvShows> {
                 override fun onFailure(call: Call<TvShows>, t: Throwable) {

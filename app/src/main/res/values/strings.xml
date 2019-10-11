@@ -2,6 +2,7 @@
     <string name="app_name">Movie Catalogue</string>
 
     <string name="menu_change_language">Change Language</string>
+    <string name="menu_search">Search</string>
 
     <string name="tab_movies">MOVIES</string>
     <string name="tab_tv_shows">TV SHOWS</string>

@@ -1,11 +1,13 @@
 package me.mrizkip.moviecatalogue.ui.movie
 
 
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.provider.Settings
+import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -14,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_movie.view.*
 import me.mrizkip.moviecatalogue.R
 import me.mrizkip.moviecatalogue.model.Movie
 import me.mrizkip.moviecatalogue.ui.detailMovie.DetailMovieActivity
+import org.jetbrains.anko.support.v4.act
 
 class MovieFragment : Fragment() {
     private var movieList: ArrayList<Movie> = arrayListOf()
@@ -26,6 +29,7 @@ class MovieFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_movie, container, false)
     }
 
@@ -71,5 +75,51 @@ class MovieFragment : Fragment() {
                 adapter.notifyDataSetChanged()
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_search, menu)
+
+        val searchMenu = menu.findItem(R.id.menuMain_search)
+        val searchManager= activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        var searchView: SearchView? = null
+
+        searchMenu?.let { searchView = it.actionView as SearchView }
+
+        searchView?.setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
+        searchView?.queryHint = "Search Movie"
+
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                if (query.equals("")) {
+                    movieList.clear()
+                    adapter.notifyDataSetChanged()
+                } else {
+                    // fetch movie from query
+//                    query?.let {
+                }
+                return false
+            }
+        })
+
+        searchView?.setOnCloseListener {
+            view?.movie_progressBar?.visibility = View.VISIBLE
+            viewModel.fetchMovie()
+            searchView?.onActionViewCollapsed()
+            true
+        }
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menuMain_language -> startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
