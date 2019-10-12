@@ -4,6 +4,7 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.provider.Settings
 import android.view.*
 import android.widget.SearchView
@@ -85,7 +86,9 @@ class TvShowFragment : Fragment() {
         searchMenu?.let { searchView = it.actionView as SearchView }
 
         searchView?.setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
-        searchView?.queryHint = "Search Movie"
+        searchView?.queryHint = "Search Tv Show"
+
+        val handler = Handler()
 
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -97,14 +100,24 @@ class TvShowFragment : Fragment() {
                     tvShowList.clear()
                     adapter.notifyDataSetChanged()
                 } else {
-                    // fetch movie from query
-//                    query?.let {
+                    query?.let {
+                        if (it.length > 2) {
+                            handler.removeCallbacksAndMessages(null)
+                            handler.postDelayed({
+                                tvShowList.clear()
+                                adapter.notifyDataSetChanged()
+                                view?.tvShow_progressBar?.visibility = View.VISIBLE
+                                viewModel.searchTvShow(it)
+                            }, 300)
+                        }
+                    }
                 }
                 return false
             }
         })
 
         searchView?.setOnCloseListener {
+            view?.tvShow_progressBar?.visibility = View.VISIBLE
             viewModel.fetchTvShows()
             searchView?.onActionViewCollapsed()
             true

@@ -5,6 +5,7 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.provider.Settings
 import android.view.*
 import android.widget.SearchView
@@ -16,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_movie.view.*
 import me.mrizkip.moviecatalogue.R
 import me.mrizkip.moviecatalogue.model.Movie
 import me.mrizkip.moviecatalogue.ui.detailMovie.DetailMovieActivity
-import org.jetbrains.anko.support.v4.act
 
 class MovieFragment : Fragment() {
     private var movieList: ArrayList<Movie> = arrayListOf()
@@ -81,13 +81,15 @@ class MovieFragment : Fragment() {
         inflater.inflate(R.menu.menu_search, menu)
 
         val searchMenu = menu.findItem(R.id.menuMain_search)
-        val searchManager= activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         var searchView: SearchView? = null
 
         searchMenu?.let { searchView = it.actionView as SearchView }
 
         searchView?.setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
         searchView?.queryHint = "Search Movie"
+
+        val handler = Handler()
 
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -99,8 +101,17 @@ class MovieFragment : Fragment() {
                     movieList.clear()
                     adapter.notifyDataSetChanged()
                 } else {
-                    // fetch movie from query
-//                    query?.let {
+                    query?.let {
+                        if (it.length > 2) {
+                            handler.removeCallbacksAndMessages(null)
+                            handler.postDelayed({
+                                movieList.clear()
+                                adapter.notifyDataSetChanged()
+                                view?.movie_progressBar?.visibility = View.VISIBLE
+                                viewModel.searchMovie(it)
+                            }, 300)
+                        }
+                    }
                 }
                 return false
             }
@@ -117,7 +128,7 @@ class MovieFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.menuMain_language -> startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
         }
         return super.onOptionsItemSelected(item)

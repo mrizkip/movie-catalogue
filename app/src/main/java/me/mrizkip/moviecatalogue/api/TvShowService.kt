@@ -14,4 +14,7 @@ interface TvShowService {
 
     @GET("/3/tv/{id}?")
     fun getDetailTvShow(@Path("id") id: String, @Query("api_key") api_key: String): Call<TvShow>
+
+    @GET("/3/search/tv?")
+    fun searchTvShow(@Query("api_key") api_key: String, @Query("query") tvShowName: String) : Call<TvShows>
 }

@@ -49,4 +49,25 @@ class TvShowViewModel : ViewModel() {
     fun getTvShowsData(): LiveData<List<TvShow>> {
         return tvShowData
     }
+
+    fun searchTvShow(tvShowName: String) {
+        tvShowService.searchTvShow(BuildConfig.TMDB_API_KEY, tvShowName)
+            .enqueue(object : Callback<TvShows> {
+                override fun onFailure(call: Call<TvShows>, t: Throwable) {
+                    status.value = false
+                    tvShowData.value = null
+                }
+
+                override fun onResponse(call: Call<TvShows>, response: Response<TvShows>) {
+                    if (response.isSuccessful) {
+                        status.value = true
+                        tvShowData.value = response.body()?.tvShows
+                    } else {
+                        status.value = false
+                        tvShowData.value = null
+                    }
+                }
+
+            })
+    }
 }

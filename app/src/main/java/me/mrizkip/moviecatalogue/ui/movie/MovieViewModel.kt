@@ -50,4 +50,25 @@ class MovieViewModel : ViewModel() {
         return movieData
     }
 
+    fun searchMovie(movieName: String) {
+        movieService.searchMovie(BuildConfig.TMDB_API_KEY, movieName)
+            .enqueue(object : Callback<Movies> {
+                override fun onFailure(call: Call<Movies>, t: Throwable) {
+                    status.value = false
+                    movieData.value = null
+                }
+
+                override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
+                    if (response.isSuccessful) {
+                        status.value = true
+                        movieData.value = response.body()?.movies
+                    } else {
+                        status.value = false
+                        movieData.value = null
+                    }
+                }
+
+            })
+    }
+
 }
