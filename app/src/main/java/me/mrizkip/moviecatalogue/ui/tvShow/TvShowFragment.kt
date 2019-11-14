@@ -86,7 +86,7 @@ class TvShowFragment : Fragment() {
         searchMenu?.let { searchView = it.actionView as SearchView }
 
         searchView?.setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
-        searchView?.queryHint = "Search Tv Show"
+        searchView?.queryHint = getString(R.string.tv_show_fragment_search_hint)
 
         val handler = Handler()
 

@@ -87,7 +87,7 @@ class MovieFragment : Fragment() {
         searchMenu?.let { searchView = it.actionView as SearchView }
 
         searchView?.setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
-        searchView?.queryHint = "Search Movie"
+        searchView?.queryHint = getString(R.string.movie_fragment_search_hint)
 
         val handler = Handler()
 

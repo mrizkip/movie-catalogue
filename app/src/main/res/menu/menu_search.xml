@@ -7,13 +7,13 @@
         android:iconifiedByDefault="false"
         app:actionViewClass="android.widget.SearchView"
         android:title="@string/menu_search"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item android:id="@+id/menuMain_language"
         android:title="@string/menu_change_language"
         android:icon="@drawable/ic_language_24dp"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="collapseActionView" />
     <item android:id="@+id/menuMain_reminder"
-        android:title="@string/menu_change_language"
+        android:title="@string/menu_reminder"
         android:icon="@drawable/ic_notifications"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="collapseActionView" />
 </menu>

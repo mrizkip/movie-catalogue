@@ -4,6 +4,7 @@
 
     <string name="menu_change_language">Ubah Bahasa</string>
     <string name="menu_search">Pencarian</string>
+    <string name="menu_reminder">Pengingat</string>
 
     <string name="tab_movies">FILM</string>
     <string name="tab_tv_shows">SERIAL TV</string>
@@ -37,9 +38,11 @@
 
     <string name="movie_fragment_error_icon">Ikon Kesalahan</string>
     <string name="movie_fragment_error_message">Terjadi kesalahan, data tidak dapat ditampilkan</string>
+    <string name="movie_fragment_search_hint">Cari Film</string>
 
     <string name="tv_show_fragment_error_icon">Ikon Kesalahan</string>
     <string name="tv_show_fragment_error_message">Terjadi kesalahan, data tidak dapat ditampilkan</string>
+    <string name="tv_show_fragment_search_hint">Cari Serial Tv</string>
 
     <string name="poster_url_small">https://image.tmdb.org/t/p/w185</string>
     <string name="poster_url_huge">https://image.tmdb.org/t/p/w500</string>

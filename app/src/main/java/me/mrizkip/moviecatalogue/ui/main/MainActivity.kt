@@ -47,17 +47,4 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState, outPersistentState)
         selectedItem = main_bottomNavigation.selectedItemId
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.menu_main, menu)
-//        return super.onCreateOptionsMenu(menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        if (item.itemId == R.id.menuMain_language) {
-//            val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
-//            startActivity(intent)
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 }
