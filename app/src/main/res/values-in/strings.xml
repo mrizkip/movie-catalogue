@@ -52,4 +52,9 @@
     <string name="detail_added_to_favorite">Item ditambahkan di favorit</string>
     <string name="detail_removed_from_favorite">Item dihapus dari favorit</string>
 
+    <string name="reminder_release_reminder">Pengingat Rilis</string>
+    <string name="reminder_release_desc">Pengingat semua film yang rilis hari ini</string>
+    <string name="reminder_daily_reminder">Pengingat Harian</string>
+    <string name="reminder_daily_desc">Pengingat untuk kembali ke aplikasi</string>
+
 </resources>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.reminder.ReminderActivity">
+
+    <TextView
+        android:id="@+id/reminder_tvRelease"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:text="@string/reminder_release_reminder"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/font_normal"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/reminder_swRelease"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/reminder_tvReleaseDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:text="@string/reminder_release_desc"
+        android:textColor="@color/textSecondary"
+        app:layout_constraintEnd_toStartOf="@id/reminder_swRelease"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reminder_tvRelease" />
+
+    <Switch
+        android:id="@+id/reminder_swRelease"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        app:layout_constraintBottom_toBottomOf="@id/reminder_tvReleaseDesc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/reminder_tvRelease" />
+
+    <TextView
+        android:id="@+id/reminder_tvDaily"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:text="@string/reminder_daily_reminder"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/font_normal"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/reminder_swDaily"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reminder_tvReleaseDesc" />
+
+    <TextView
+        android:id="@+id/reminder_tvDailyDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:text="@string/reminder_daily_desc"
+        android:textColor="@color/textSecondary"
+        app:layout_constraintEnd_toStartOf="@id/reminder_swDaily"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reminder_tvDaily" />
+
+    <Switch
+        android:id="@+id/reminder_swDaily"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        app:layout_constraintBottom_toBottomOf="@id/reminder_tvDailyDesc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/reminder_tvDaily" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
